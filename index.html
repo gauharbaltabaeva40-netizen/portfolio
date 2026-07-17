@@ -3,22 +3,20 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Бекзат Шеметаев — Веб-разработчик & Веб-дизайнер</title>
-    
-    <!-- SEO Meta -->
-    <meta name="description" content="Бекзат Шеметаев — веб-разработчик және веб-дизайнер. Заманауи, пайдаланушыға бағытталған веб-тәжірибелерді жобалаймын және құрастырамын. DERO MEBEL, Delicious, ADAL AVTO, SmileDent жобалары." />
-    <meta name="keywords" content="веб-разработчик, веб-дизайнер, UI/UX, портфолио, Қазақстан, Астана, сайт жасау, интернет-магазин, лендинг" />
+    <title>Бекзат Шеметаев — Веб-разработчик & Дизайнер</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Бекзат Шеметаев — веб-разработчик және дизайнер. Заманауи веб-тәжірибелер." />
+    <meta name="keywords" content="веб-разработчик, веб-дизайнер, UI/UX, портфолио, Астана" />
     <meta name="author" content="Бекзат Шеметаев" />
-    <link rel="canonical" href="https://shemetaev.kz" />
-    
+
     <!-- Open Graph -->
-    <meta property="og:title" content="Бекзат Шеметаев — Веб-разработчик & Веб-дизайнер" />
-    <meta property="og:description" content="Заманауи, пайдаланушыға бағытталған веб-тәжірибелерді жобалаймын және құрастырамын." />
+    <meta property="og:title" content="Бекзат Шеметаев — Веб-разработчик" />
+    <meta property="og:description" content="Заманауи, пайдаланушыға бағытталған веб-тәжірибелер." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://shemetaev.kz" />
-    
+
     <style>
-        /* ===== RESET & BASE ===== */
+        /* ===== RESET & БАЗА ===== */
         * {
             margin: 0;
             padding: 0;
@@ -31,8 +29,9 @@
 
         body {
             font-family: 'Georgia', 'Times New Roman', serif;
-            background: linear-gradient(145deg, #0a0a0a 0%, #1a1a1a 40%, #2a2a2a 70%, #0a0a0a 100%);
-            color: #f0f0f0;
+            /* Көк + Ақ градиент */
+            background: linear-gradient(145deg, #0a1628 0%, #14345c 45%, #1e4a7a 75%, #0a1628 100%);
+            color: #f0faff;
             min-height: 100vh;
             line-height: 1.6;
             overflow-x: hidden;
@@ -42,7 +41,6 @@
             text-decoration: none;
             color: inherit;
         }
-
         ul {
             list-style: none;
         }
@@ -58,94 +56,93 @@
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #111;
+            background: #0a1a2e;
         }
         ::-webkit-scrollbar-thumb {
-            background: #444;
+            background: #2a6bb0;
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #666;
+            background: #4a8fd4;
         }
 
-        /* ===== TYPOGRAPHY ===== */
-        h1, h2, h3, h4 {
+        /* ===== АНИМАЦИЯЛЫҚ КЛАСТАР ===== */
+        .anim-fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .anim-fade-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .anim-fade-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .anim-visible {
+            opacity: 1 !important;
+            transform: translateX(0) translateY(0) scale(1) !important;
+        }
+
+        .delay-1 {
+            transition-delay: 0.05s;
+        }
+        .delay-2 {
+            transition-delay: 0.10s;
+        }
+        .delay-3 {
+            transition-delay: 0.15s;
+        }
+        .delay-4 {
+            transition-delay: 0.20s;
+        }
+
+        /* ===== ТИПОГРАФИЯ ===== */
+        h1,
+        h2,
+        h3,
+        h4 {
             font-weight: 700;
             letter-spacing: 0.02em;
+            color: #ffffff;
         }
-
         h1 {
             font-size: clamp(2.4rem, 6vw, 4.2rem);
             line-height: 1.1;
         }
-
         h2 {
             font-size: clamp(2rem, 4vw, 3rem);
             margin-bottom: 12px;
         }
-
         h3 {
             font-size: 1.3rem;
             margin-bottom: 6px;
+        }
+        p,
+        li {
+            color: #b8d4f0;
         }
 
         .section-tag {
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 4px;
-            color: #888;
+            color: #7aa9e0;
             margin-bottom: 8px;
             font-weight: 700;
         }
 
-        /* ===== АНИМАЦИЯЛЫҚ КЛАСТАР ===== */
-        /* Бастапқы күй – мөлдір, жылжу */
-        .anim-fade-up {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .anim-fade-left {
-            opacity: 0;
-            transform: translateX(-40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .anim-fade-right {
-            opacity: 0;
-            transform: translateX(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .anim-fade-scale {
-            opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        /* Көрінген күй */
-        .anim-visible {
-            opacity: 1 !important;
-            transform: translateX(0) translateY(0) scale(1) !important;
-        }
-
-        /* Кешігулер (stagger) */
-        .delay-1 { transition-delay: 0.05s; }
-        .delay-2 { transition-delay: 0.10s; }
-        .delay-3 { transition-delay: 0.15s; }
-        .delay-4 { transition-delay: 0.20s; }
-        .delay-5 { transition-delay: 0.25s; }
-        .delay-6 { transition-delay: 0.30s; }
-
-        /* ===== HEADER / NAV ===== */
+        /* ===== HEADER / ЛОГО ===== */
         header {
             padding: 20px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             position: sticky;
             top: 0;
-            background: rgba(10,10,10,0.85);
-            backdrop-filter: blur(12px);
+            background: rgba(10, 22, 40, 0.88);
+            backdrop-filter: blur(14px);
             z-index: 100;
         }
 
@@ -157,13 +154,41 @@
             gap: 12px;
         }
 
-        .logo {
-            font-size: 1.5rem;
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Веб-сайт логотипі (SVG) */
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #3b82f6, #93c5fd);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        .logo-icon svg {
+            width: 26px;
+            height: 26px;
+            fill: none;
+            stroke: #ffffff;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
             font-weight: 700;
             letter-spacing: 1px;
+            color: #ffffff;
         }
-        .logo span {
-            color: #aaa;
+        .logo-text span {
+            color: #7aa9e0;
         }
 
         .nav-links {
@@ -171,8 +196,8 @@
             gap: 28px;
             font-size: 0.95rem;
             font-weight: 600;
+            color: #c0d8f0;
         }
-
         .nav-links a {
             transition: color 0.25s;
             position: relative;
@@ -184,14 +209,14 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: #f0f0f0;
+            background: #3b82f6;
             transition: width 0.3s;
         }
         .nav-links a:hover::after {
             width: 100%;
         }
         .nav-links a:hover {
-            color: #fff;
+            color: #ffffff;
         }
 
         .hamburger {
@@ -207,7 +232,7 @@
             display: block;
             width: 26px;
             height: 2.5px;
-            background: #f0f0f0;
+            background: #f0faff;
             transition: 0.3s;
             border-radius: 2px;
         }
@@ -217,205 +242,234 @@
             padding: 70px 0 60px;
             text-align: center;
         }
-
         .hero .badge {
             display: inline-block;
-            border: 1px solid rgba(255,255,255,0.15);
+            border: 1px solid rgba(59, 130, 246, 0.4);
             padding: 6px 20px;
             border-radius: 40px;
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 3px;
-            color: #aaa;
+            color: #93c5fd;
             margin-bottom: 24px;
             font-weight: 600;
+            background: rgba(59, 130, 246, 0.08);
         }
-
         .hero h1 {
             max-width: 800px;
             margin: 0 auto 20px;
         }
-
         .hero h1 .highlight {
-            background: linear-gradient(135deg, #fff, #888);
+            background: linear-gradient(135deg, #ffffff, #93c5fd);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
         .hero p {
             max-width: 640px;
             margin: 0 auto 32px;
             font-size: 1.15rem;
-            color: #bbb;
+            color: #b8d4f0;
             line-height: 1.7;
         }
-
         .hero .availability {
             display: inline-block;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             padding: 8px 28px;
             border-radius: 40px;
             font-size: 0.85rem;
             letter-spacing: 2px;
-            color: #aaa;
+            color: #93c5fd;
             font-weight: 600;
+            background: rgba(59, 130, 246, 0.06);
         }
 
-        /* ===== SECTION COMMON ===== */
+        /* ===== БӨЛІМ ===== */
         section {
             padding: 70px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
-
         section:last-of-type {
             border-bottom: none;
         }
-
         .section-header {
             text-align: center;
             margin-bottom: 48px;
         }
-
         .section-header p {
-            color: #999;
+            color: #9bb8e0;
             max-width: 560px;
             margin: 0 auto;
             font-size: 1.05rem;
         }
 
-        /* ===== PROJECTS ===== */
+        /* ===== ЖОБАЛАР ===== */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 32px;
         }
-
         .project-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(59, 130, 246, 0.2);
             border-radius: 16px;
             padding: 28px 24px 24px;
             transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
             cursor: default;
+            backdrop-filter: blur(4px);
         }
-
         .project-card:hover {
             transform: translateY(-6px);
-            border-color: rgba(255,255,255,0.15);
-            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.6);
+            border-color: #3b82f6;
+            box-shadow: 0 20px 40px -12px rgba(59, 130, 246, 0.3);
         }
-
         .project-card .project-number {
             font-size: 0.7rem;
-            color: #555;
+            color: #4a7ab0;
             letter-spacing: 2px;
             font-weight: 700;
             margin-bottom: 8px;
         }
-
         .project-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 4px;
+            color: #fff;
         }
-
         .project-card .project-category {
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: #888;
+            color: #7aa9e0;
             margin-bottom: 12px;
             font-weight: 600;
         }
-
         .project-card .project-desc {
-            color: #bbb;
+            color: #b8d4f0;
             font-size: 0.95rem;
             margin-bottom: 16px;
         }
-
         .project-card .project-link {
             display: inline-block;
             font-size: 0.85rem;
             font-weight: 600;
-            color: #ccc;
-            border-bottom: 1.5px solid rgba(255,255,255,0.15);
+            color: #93c5fd;
+            border-bottom: 1.5px solid rgba(59, 130, 246, 0.3);
             transition: border-color 0.25s, color 0.25s;
         }
         .project-card .project-link:hover {
-            color: #fff;
-            border-color: #fff;
+            color: #ffffff;
+            border-color: #3b82f6;
         }
 
-        /* ===== PROCESS ===== */
+        /* ===== ПРОЦЕСС ===== */
         .process-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 28px;
             text-align: center;
         }
-
         .process-step {
             padding: 20px 12px;
             border-radius: 12px;
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.04);
-            transition: background 0.3s;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            transition: background 0.3s, border-color 0.3s;
         }
-
         .process-step:hover {
-            background: rgba(255,255,255,0.05);
+            background: rgba(59, 130, 246, 0.08);
+            border-color: #3b82f6;
         }
-
         .process-step .step-number {
             font-size: 2.4rem;
             font-weight: 700;
-            color: #444;
+            color: #2a6bb0;
             margin-bottom: 6px;
             font-family: 'Georgia', serif;
         }
-
         .process-step h4 {
-            font-size: 1.1rem;
-            margin-bottom: 4px;
+            color: #fff;
         }
-
         .process-step p {
             font-size: 0.9rem;
-            color: #999;
+            color: #9bb8e0;
         }
 
-        /* ===== SERVICES ===== */
+        /* ===== ҚЫЗМЕТТЕР (ЕРЕКШЕ АНИМАЦИЯ) ===== */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            gap: 28px;
+            perspective: 1200px;
         }
 
         .service-item {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 12px;
-            padding: 24px 18px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            border-radius: 16px;
+            padding: 30px 18px;
             text-align: center;
-            transition: background 0.3s;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+            cursor: default;
+            position: relative;
+            backdrop-filter: blur(4px);
         }
 
+        /* Кіру анимациясы (3D айналу + масштаб) */
+        .service-item.anim-visible {
+            animation: servicePop 0.9s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        @keyframes servicePop {
+            0% {
+                opacity: 0;
+                transform: rotateY(45deg) scale(0.7) translateZ(-50px);
+            }
+            60% {
+                opacity: 1;
+                transform: rotateY(-5deg) scale(1.05) translateZ(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: rotateY(0deg) scale(1) translateZ(0);
+            }
+        }
+
+        /* Қызметтерге арналған hover 3D эффектісі */
         .service-item:hover {
-            background: rgba(255,255,255,0.05);
+            transform: rotateY(10deg) scale(1.05) translateZ(20px);
+            border-color: #3b82f6;
+            box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.5), inset 0 0 30px rgba(59, 130, 246, 0.1);
+            background: rgba(59, 130, 246, 0.1);
         }
 
         .service-item .icon {
-            font-size: 2rem;
-            margin-bottom: 8px;
+            font-size: 2.6rem;
+            margin-bottom: 10px;
             display: block;
+            filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.3));
+            transition: transform 0.4s;
         }
-
+        .service-item:hover .icon {
+            transform: scale(1.2) rotate(6deg);
+        }
         .service-item h4 {
-            font-size: 1rem;
+            color: #ffffff;
+            font-size: 1.1rem;
+        }
+        .service-item .glow-line {
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+            margin: 10px auto 0;
+            border-radius: 4px;
+            opacity: 0.5;
+            transition: width 0.4s, opacity 0.4s;
+        }
+        .service-item:hover .glow-line {
+            width: 80px;
+            opacity: 1;
         }
 
-        /* ===== CONTACT ===== */
+        /* ===== БАЙЛАНЫС (ФОРМА) ===== */
         .contact-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -424,25 +478,22 @@
         }
 
         .contact-info h3 {
-            margin-bottom: 12px;
+            color: #fff;
         }
-
         .contact-info p {
-            color: #bbb;
+            color: #b8d4f0;
             margin-bottom: 6px;
         }
-
         .contact-info .contact-detail {
             margin-top: 16px;
         }
-
         .contact-info .contact-detail a {
-            color: #ccc;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            color: #93c5fd;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
             transition: border-color 0.25s;
         }
         .contact-info .contact-detail a:hover {
-            border-color: #fff;
+            border-color: #3b82f6;
             color: #fff;
         }
 
@@ -452,102 +503,151 @@
             margin-top: 18px;
             flex-wrap: wrap;
         }
-
         .social-links a {
             font-size: 0.95rem;
-            color: #aaa;
+            color: #93c5fd;
             border-bottom: 1px solid transparent;
             transition: color 0.25s, border-color 0.25s;
             padding-bottom: 2px;
         }
         .social-links a:hover {
             color: #fff;
-            border-color: #fff;
+            border-color: #3b82f6;
         }
 
+        /* ===== ФОРМА ===== */
         .contact-form {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 20px;
         }
-
         .contact-form input,
-        .contact-form textarea {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 10px;
+        .contact-form select {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 12px;
             padding: 14px 18px;
             font-family: inherit;
             font-size: 1rem;
-            color: #f0f0f0;
-            transition: border-color 0.3s;
+            color: #f0faff;
+            transition: border-color 0.3s, box-shadow 0.3s;
             outline: none;
         }
-
         .contact-form input:focus,
-        .contact-form textarea:focus {
-            border-color: rgba(255,255,255,0.25);
+        .contact-form select:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+        }
+        .contact-form input::placeholder {
+            color: #6a8fb0;
         }
 
-        .contact-form input::placeholder,
-        .contact-form textarea::placeholder {
-            color: #666;
+        /* Сервис опциялары (Анимациялық карточкалар) */
+        .service-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .service-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(59, 130, 246, 0.15);
+            border-radius: 12px;
+            padding: 14px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            font-weight: 600;
+            color: #b8d4f0;
+            user-select: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        .service-card:hover {
+            background: rgba(59, 130, 246, 0.08);
+            border-color: #3b82f6;
+            transform: translateY(-3px);
+        }
+        .service-card input[type="radio"] {
+            display: none;
+        }
+        .service-card .emoji {
+            font-size: 1.5rem;
         }
 
-        .contact-form textarea {
-            min-height: 120px;
-            resize: vertical;
+        /* Таңдалған күй (анимациялық жарқыл) */
+        .service-card.selected {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: #3b82f6;
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.3), inset 0 0 20px rgba(59, 130, 246, 0.05);
+            transform: scale(1.02);
+            color: #ffffff;
+            animation: cardPulse 0.5s ease;
+        }
+
+        @keyframes cardPulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.08);
+            }
+            100% {
+                transform: scale(1.02);
+            }
         }
 
         .contact-form button {
-            background: #f0f0f0;
-            color: #111;
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            color: #fff;
             border: none;
             border-radius: 40px;
-            padding: 14px 32px;
+            padding: 16px 32px;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
+            transition: all 0.3s;
             font-family: inherit;
             letter-spacing: 0.5px;
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
         }
-
         .contact-form button:hover {
-            background: #fff;
-            transform: scale(1.01);
+            background: linear-gradient(135deg, #1d4ed8, #2563eb);
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 12px 32px rgba(59, 130, 246, 0.5);
+        }
+        .contact-form button:active {
+            transform: scale(0.98);
         }
 
         /* ===== FOOTER ===== */
         footer {
             padding: 32px 0;
-            border-top: 1px solid rgba(255,255,255,0.04);
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
             text-align: center;
             font-size: 0.85rem;
-            color: #555;
+            color: #4a7ab0;
         }
 
-        /* ===== RESPONSIVE ===== */
+        /* ===== АДАПТИВ ===== */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
                 flex-direction: column;
                 width: 100%;
-                background: rgba(10,10,10,0.96);
+                background: rgba(10, 22, 40, 0.98);
                 padding: 20px 0;
                 gap: 16px;
                 text-align: center;
                 border-radius: 0 0 12px 12px;
             }
-
             .nav-links.open {
                 display: flex;
             }
-
             .hamburger {
                 display: flex;
             }
-
             .hamburger.active span:nth-child(1) {
                 transform: rotate(45deg) translate(5px, 5px);
             }
@@ -562,20 +662,19 @@
                 grid-template-columns: 1fr;
                 gap: 32px;
             }
-
             .hero {
                 padding: 50px 0 40px;
             }
-
             section {
                 padding: 50px 0;
             }
-
             .projects-grid {
                 grid-template-columns: 1fr;
             }
-
             .process-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .service-options {
                 grid-template-columns: 1fr 1fr;
             }
         }
@@ -584,9 +683,11 @@
             .process-grid {
                 grid-template-columns: 1fr;
             }
-
             .services-grid {
                 grid-template-columns: 1fr 1fr;
+            }
+            .service-options {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -597,7 +698,18 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo">B.S<span>.</span></div>
+                <div class="logo-wrapper">
+                    <!-- Веб-сайт логотипі (SVG) -->
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                            <path d="M2 17l10 5 10-5" />
+                            <path d="M2 12l10 5 10-5" />
+                            <circle cx="12" cy="12" r="2" />
+                        </svg>
+                    </div>
+                    <div class="logo-text">B<span>.</span></div>
+                </div>
 
                 <ul class="nav-links" id="navLinks">
                     <li><a href="#projects">Жобалар</a></li>
@@ -616,177 +728,180 @@
     <!-- ===== HERO ===== -->
     <section class="hero">
         <div class="container">
-            <div class="badge anim-fade-up">Веб-разработчик &amp; Веб-дизайнер</div>
+            <div class="badge anim-fade-up">Веб-разработчик &amp; Дизайнер</div>
             <h1 class="anim-fade-up delay-1">
                 Бекзат <span class="highlight">Шеметаев</span>
             </h1>
             <p class="anim-fade-up delay-2">
-                Мен заманауи, пайдаланушыға бағытталған веб-тәжірибелерді жобалап 
-                және құрастырамын. Таза дизайн, тегіс өзара әрекеттесу және 
-                маңыздылығы бар детальдарға құштармын.
+                Заманауи, пайдаланушыға бағытталған веб-тәжірибелерді жобалаймын.
+                Таза дизайн, тегіс өзара әрекеттесу және мәнді детальдар.
             </p>
-            <div class="availability anim-fade-up delay-3">Қазіргі уақытта жұмысқа қолжетімді — Астана</div>
+            <div class="availability anim-fade-up delay-3">Қолжетімді — Астана</div>
         </div>
     </section>
 
-    <!-- ===== PROJECTS ===== -->
+    <!-- ===== ЖОБАЛАР ===== -->
     <section id="projects">
         <div class="container">
             <div class="section-header">
                 <div class="section-tag anim-fade-up">Таңдаулы жобалар</div>
                 <h2 class="anim-fade-up delay-1">Соңғы жұмыстарым</h2>
-                <p class="anim-fade-up delay-2">Әр жоба — бірегей міндеттерге арналған теңшелген шешім.</p>
+                <p class="anim-fade-up delay-2">Әр жоба — бірегей міндеттерге арналған шешім.</p>
             </div>
-
             <div class="projects-grid">
-                <!-- 1. DERO MEBEL -->
                 <div class="project-card anim-fade-up delay-1">
                     <div class="project-number">01</div>
                     <h3>DERO MEBEL</h3>
                     <div class="project-category">Интернет-магазин</div>
-                    <p class="project-desc">
-                        Премиум жиһаз брендінің интернет-магазині. Заманауи дизайн, 
-                        ыңғайлы каталог және төлем жүйесі.
-                    </p>
+                    <p class="project-desc">Премиум жиһаз бренді. Ыңғайлы каталог және төлем.</p>
                     <a href="https://dero-mebel-kz.vercel.app/" target="_blank" class="project-link">Сайтты көру →</a>
                 </div>
-
-                <!-- 2. Delicious -->
                 <div class="project-card anim-fade-up delay-2">
                     <div class="project-number">02</div>
                     <h3>Delicious</h3>
                     <div class="project-category">Бір беттік сайт</div>
-                    <p class="project-desc">
-                        Премиум мейрамхананың визиткалық сайты. Әдемі интерьер, 
-                        гастрономиялық мәзір және атмосфера.
-                    </p>
+                    <p class="project-desc">Мейрамхана визиткасы. Әдемі интерьер және мәзір.</p>
                     <a href="https://delicious-restaurnat.vercel.app/" target="_blank" class="project-link">Сайтты көру →</a>
                 </div>
-
-                <!-- 3. ADAL AVTO -->
                 <div class="project-card anim-fade-up delay-3">
                     <div class="project-number">03</div>
                     <h3>ADAL AVTO</h3>
                     <div class="project-category">Көп беттік сайт</div>
-                    <p class="project-desc">
-                        Автосервис орталығының корпоративті сайты. Қызметтер, бағалар, 
-                        диагностика және жазылу жүйесі.
-                    </p>
+                    <p class="project-desc">Автосервис орталығы. Қызметтер, диагностика, жазылу.</p>
                     <a href="https://v0-auto-service-landing-page-three.vercel.app/" target="_blank" class="project-link">Сайтты көру →</a>
                 </div>
-
-                <!-- 4. SmileDent -->
                 <div class="project-card anim-fade-up delay-4">
                     <div class="project-number">04</div>
                     <h3>SmileDent</h3>
                     <div class="project-category">Курс платформасы</div>
-                    <p class="project-desc">
-                        Стоматология клиникасының сайты. Онлайн жазылу, мамандар профилі 
-                        және білім беру контенті.
-                    </p>
+                    <p class="project-desc">Стоматология клиникасы. Онлайн жазылу және білім.</p>
                     <a href="https://dental-clinic-shymkent.vercel.app/" target="_blank" class="project-link">Сайтты көру →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== PROCESS ===== -->
+    <!-- ===== ПРОЦЕСС ===== -->
     <section id="process">
         <div class="container">
             <div class="section-header">
                 <div class="section-tag anim-fade-up">Жұмыс процесі</div>
                 <h2 class="anim-fade-up delay-1">Қалай жұмыс істеймін</h2>
-                <p class="anim-fade-up delay-2">Әр жобаны сапалы әрі уақытында жеткізу үшін нақты кезеңдер.</p>
+                <p class="anim-fade-up delay-2">Әр жобаны сапалы жеткізу үшін кезеңдер.</p>
             </div>
-
             <div class="process-grid">
                 <div class="process-step anim-fade-up delay-1">
                     <div class="step-number">01</div>
                     <h4>Зерттеу</h4>
-                    <p>Мақсаттар, аудитория және жоба талаптарын талдау.</p>
+                    <p>Мақсат, аудитория және талаптарды талдау.</p>
                 </div>
                 <div class="process-step anim-fade-up delay-2">
                     <div class="step-number">02</div>
                     <h4>Дизайн</h4>
-                    <p>Прототиптер, макеттер және визуалды концепциялар.</p>
+                    <p>Прототиптер, макеттер және визуалдар.</p>
                 </div>
                 <div class="process-step anim-fade-up delay-3">
                     <div class="step-number">03</div>
                     <h4>Тестілеу</h4>
-                    <p>Функционалдық, юзабилити және кросс-браузер тестілеу.</p>
+                    <p>Функционалдық, юзабилити және браузерлер.</p>
                 </div>
                 <div class="process-step anim-fade-up delay-4">
                     <div class="step-number">04</div>
                     <h4>Жеткізу</h4>
-                    <p>Дайын өнімді хостингке орналастыру және қолдау.</p>
+                    <p>Хостингке орналастыру және қолдау.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== SERVICES ===== -->
+    <!-- ===== ҚЫЗМЕТТЕР (ЕРЕКШЕ АНИМАЦИЯ) ===== -->
     <section id="services">
         <div class="container">
             <div class="section-header">
                 <div class="section-tag anim-fade-up">Қызметтер</div>
                 <h2 class="anim-fade-up delay-1">Не ұсынамын</h2>
-                <p class="anim-fade-up delay-2">Сіздің бизнесіңізге арналған веб-шешімдер.</p>
+                <p class="anim-fade-up delay-2">Бизнесіңізге арналған веб-шешімдер.</p>
             </div>
-
             <div class="services-grid">
                 <div class="service-item anim-fade-up delay-1">
                     <span class="icon">📄</span>
                     <h4>Бір беттік сайт</h4>
+                    <div class="glow-line"></div>
                 </div>
                 <div class="service-item anim-fade-up delay-2">
                     <span class="icon">🏢</span>
                     <h4>Көп беттік сайт</h4>
+                    <div class="glow-line"></div>
                 </div>
                 <div class="service-item anim-fade-up delay-3">
                     <span class="icon">🛒</span>
                     <h4>Интернет-магазин</h4>
+                    <div class="glow-line"></div>
                 </div>
                 <div class="service-item anim-fade-up delay-4">
                     <span class="icon">🎓</span>
                     <h4>Курс платформасы</h4>
+                    <div class="glow-line"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== CONTACT ===== -->
+    <!-- ===== БАЙЛАНЫС / ФОРМА ===== -->
     <section id="contact">
         <div class="container">
             <div class="section-header">
                 <div class="section-tag anim-fade-up">Байланыс</div>
                 <h2 class="anim-fade-up delay-1">Жобаңызды талқылайық</h2>
-                <p class="anim-fade-up delay-2">Кез келген сұрақ немесе жоба бойынша хабарласыңыз.</p>
+                <p class="anim-fade-up delay-2">Төмендегі форманы толтырып, WhatsApp арқылы жіберіңіз.</p>
             </div>
 
             <div class="contact-wrapper">
                 <div class="contact-info anim-fade-left">
                     <h3>Бекзат Шеметаев</h3>
-                    <p>Веб-разработчик &amp; Веб-дизайнер</p>
-
+                    <p>Веб-разработчик &amp; Дизайнер</p>
                     <div class="contact-detail">
                         <p>📞 <a href="tel:+77052973225">+7 705 297 3225</a></p>
                         <p>📍 Астана, Қазақстан</p>
                     </div>
-
                     <div class="social-links">
                         <a href="https://www.instagram.com/shemetaev_/" target="_blank">Instagram</a>
                         <a href="#" target="_blank">LinkedIn</a>
                         <a href="#" target="_blank">GitHub</a>
-                        <a href="#" target="_blank">Behance</a>
                     </div>
                 </div>
 
+                <!-- ФОРМА -->
                 <form class="contact-form anim-fade-right" id="contactForm">
-                    <input type="text" placeholder="Аты-жөніңіз" required />
-                    <input type="email" placeholder="Электрондық пошта" required />
-                    <input type="text" placeholder="Тақырып" />
-                    <textarea placeholder="Хабарлама мәтіні..." required></textarea>
-                    <button type="submit">Жіберу</button>
+                    <input type="text" name="name" placeholder="Аты-жөніңіз" required />
+
+                    <input type="text" name="industry" placeholder="Қандай сала? (мысалы: Мейрамхана, Автосервис)" required />
+
+                    <!-- Сервис түрі (анимациялық опциялар) -->
+                    <div class="service-options" id="serviceOptions">
+                        <label class="service-card" data-value="Бір беттік сайт">
+                            <input type="radio" name="service" value="Бір беттік сайт" />
+                            <span class="emoji">📄</span>
+                            <span>Бір беттік</span>
+                        </label>
+                        <label class="service-card" data-value="Көп беттік сайт">
+                            <input type="radio" name="service" value="Көп беттік сайт" />
+                            <span class="emoji">🏢</span>
+                            <span>Көп беттік</span>
+                        </label>
+                        <label class="service-card" data-value="Интернет-магазин">
+                            <input type="radio" name="service" value="Интернет-магазин" />
+                            <span class="emoji">🛒</span>
+                            <span>Интернет-магазин</span>
+                        </label>
+                        <label class="service-card" data-value="Курс платформасы">
+                            <input type="radio" name="service" value="Курс платформасы" />
+                            <span class="emoji">🎓</span>
+                            <span>Курс платформасы</span>
+                        </label>
+                    </div>
+
+                    <button type="submit">📲 WhatsApp арқылы жіберу</button>
                 </form>
             </div>
         </div>
@@ -801,7 +916,7 @@
 
     <!-- ===== JAVASCRIPT ===== -->
     <script>
-        // ===== Мәзір =====
+        // ===== 1. Мәзір =====
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('navLinks');
 
@@ -817,15 +932,60 @@
             });
         });
 
-        // ===== Форма =====
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Хабарламаңыз үшін рахмет! Мен жақын арада сізбен байланысамын.');
-            this.reset();
+        // ===== 2. Сервис опцияларын таңдау (анимация) =====
+        const serviceCards = document.querySelectorAll('.service-card');
+
+        serviceCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Барлық карточкалардан 'selected' класын алып тастау
+                serviceCards.forEach(c => c.classList.remove('selected'));
+
+                // Ішіндегі radio-ны таңдау
+                const radio = this.querySelector('input[type="radio"]');
+                radio.checked = true;
+
+                // Бұл карточкаға 'selected' класын қосу (анимация іске қосылады)
+                this.classList.add('selected');
+            });
         });
 
-        // ===== АНИМАЦИЯ (Intersection Observer) =====
-        const animElements = document.querySelectorAll('.anim-fade-up, .anim-fade-left, .anim-fade-right, .anim-fade-scale');
+        // ===== 3. Форманы өңдеу (WhatsApp) =====
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = this.querySelector('input[name="name"]').value.trim();
+            const industry = this.querySelector('input[name="industry"]').value.trim();
+            const selectedService = this.querySelector('input[name="service"]:checked');
+
+            if (!name) {
+                alert('Аты-жөніңізді енгізіңіз!');
+                return;
+            }
+            if (!industry) {
+                alert('Салаңызды енгізіңіз!');
+                return;
+            }
+            if (!selectedService) {
+                alert('Қызмет түрін таңдаңыз!');
+                return;
+            }
+
+            const service = selectedService.value;
+
+            // WhatsApp хабарламасын құрастыру
+            const message =
+                `Сәлем, Бекзат!%0A%0A📌 Менің аты-жөнім: ${encodeURIComponent(name)}%0A📂 Салам: ${encodeURIComponent(industry)}%0A🛠 Таңдаған қызмет: ${encodeURIComponent(service)}%0A%0AЖоба бойынша кеңес алғым келеді.`;
+
+            // WhatsApp нөмірі (халықаралық формат)
+            const phone = '77052973225';
+            const url = `https://wa.me/${phone}?text=${message}`;
+
+            // Жаңа бетте ашу
+            window.open(url, '_blank');
+        });
+
+        // ===== 4. Анимацияларды іске қосу (Intersection Observer) =====
+        const animElements = document.querySelectorAll('.anim-fade-up, .anim-fade-left, .anim-fade-right');
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -835,15 +995,27 @@
             });
         }, {
             threshold: 0.15,
-            rootMargin: '0px 0px -40px 0px'   // аздап ерте іске қосу үшін
+            rootMargin: '0px 0px -30px 0px'
         });
 
         animElements.forEach(el => {
             observer.observe(el);
         });
 
-        // Егер кейбір элементтер көрініп тұрса, оларды дереу көрсету
-        // (бірақ observer оны өзі анықтайды)
+        // Қызметтер бөліміндегі арнайы 3D анимация үшін қосымша бақылау
+        const serviceItems = document.querySelectorAll('.service-item');
+        const serviceObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('anim-visible');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        serviceItems.forEach(el => {
+            serviceObserver.observe(el);
+        });
     </script>
+
 </body>
 </html>
