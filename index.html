@@ -348,16 +348,15 @@
             margin-bottom: 28px;
         }
 
-        /* Аты-жөні – бір бүтін жол, әріптер жеке ашылады */
+        /* === АТЫ-ЖӨНІ – БІР ЖОЛДА, БҮТІН === */
         .hero-name {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: inline-flex;
+            flex-wrap: nowrap;
             align-items: center;
-            gap: 0.04em;
-            margin-bottom: 16px;
-            /* Бос орынды сындырмау үшін */
+            justify-content: center;
             white-space: nowrap;
+            margin-bottom: 16px;
+            gap: 0.02em;
         }
         .hero-name .char-wrap {
             display: inline-block;
@@ -377,7 +376,7 @@
         .hero-name .char.revealed {
             transform: translateY(0);
         }
-        /* Бос орын (бөлінбейтін) */
+        /* Бөлінбейтін бос орын */
         .hero-name .space {
             display: inline-block;
             width: 0.25em;
@@ -842,7 +841,7 @@
         </div>
     </header>
 
-    <!-- ===== HERO (толық экран + сәулелер) ===== -->
+    <!-- ===== HERO ===== -->
     <section class="hero-wrap" id="hero">
         <div class="rays-bg"></div>
         <div class="rays-overlay"></div>
@@ -850,7 +849,7 @@
         <div class="hero-content">
             <div class="badge fade-up visible">Веб-разработчик &amp; Дизайнер</div>
 
-            <!-- Аты-жөні – бір бүтін жол, әріптер жеке ашылады -->
+            <!-- Аты-жөні – бір бүтін жол -->
             <div class="hero-name" id="heroName">
                 <span class="char-wrap"><span class="char">Б</span></span>
                 <span class="char-wrap"><span class="char">е</span></span>
@@ -858,8 +857,7 @@
                 <span class="char-wrap"><span class="char">з</span></span>
                 <span class="char-wrap"><span class="char">а</span></span>
                 <span class="char-wrap"><span class="char">т</span></span>
-                <!-- Бос орын (бөлінбейтін) -->
-                <span class="space"></span>
+                <span class="space">&nbsp;</span>
                 <span class="char-wrap"><span class="char">Ш</span></span>
                 <span class="char-wrap"><span class="char">е</span></span>
                 <span class="char-wrap"><span class="char">м</span></span>
@@ -1056,9 +1054,7 @@
         </div>
     </div>
 
-    <!-- ============================================================
-    JAVASCRIPT
-    ============================================================ -->
+    <!-- ===== JAVASCRIPT ===== -->
     <script>
         // ===== 1. Hero – әріптерді ашу =====
         document.addEventListener('DOMContentLoaded', function() {
