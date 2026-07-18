@@ -272,7 +272,7 @@
             border-radius: 2px;
         }
 
-        /* ===== HERO (толық экран + сәулелер) ===== */
+        /* ===== HERO ===== */
         .hero-wrap {
             position: relative;
             width: 100%;
@@ -348,7 +348,6 @@
             margin-bottom: 28px;
         }
 
-        /* === АТЫ-ЖӨНІ – БІР ЖОЛДА, БҮТІН === */
         .hero-name {
             display: inline-flex;
             flex-wrap: nowrap;
@@ -376,7 +375,6 @@
         .hero-name .char.revealed {
             transform: translateY(0);
         }
-        /* Бөлінбейтін бос орын */
         .hero-name .space {
             display: inline-block;
             width: 0.25em;
@@ -580,6 +578,172 @@
             opacity: 1;
         }
 
+        /* ============================================================
+           FAQ (Жиі қойылатын сұрақтар)
+           ============================================================ */
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .faq-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(59, 130, 246, 0.10);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .faq-item:hover {
+            border-color: rgba(59, 130, 246, 0.25);
+        }
+        .faq-item.active {
+            border-color: #3b82f6;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.06);
+        }
+        .faq-question {
+            width: 100%;
+            padding: 18px 24px;
+            background: none;
+            border: none;
+            color: #f0faff;
+            font-family: inherit;
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            transition: color 0.3s;
+        }
+        .faq-question:hover {
+            color: #ffffff;
+        }
+        .faq-question .icon {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.10);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: transform 0.4s, background 0.3s;
+            color: #7aa9e0;
+        }
+        .faq-item.active .faq-question .icon {
+            transform: rotate(45deg);
+            background: rgba(59, 130, 246, 0.20);
+            color: #3b82f6;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                padding 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            padding: 0 24px;
+            color: #b8d4f0;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding: 0 24px 20px;
+        }
+
+        /* ============================================================
+           ПІКІРЛЕР (Testimonials) – айналмалы бағандар
+           ============================================================ */
+        .testimonials-section {
+            overflow: hidden;
+        }
+        .testimonials-grid {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 40px;
+            mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
+            max-height: 760px;
+            overflow: hidden;
+        }
+        .testimonials-column {
+            flex: 0 0 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .testimonials-column.md {
+            display: none;
+        }
+        .testimonials-column.lg {
+            display: none;
+        }
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(59, 130, 246, 0.10);
+            border-radius: 16px;
+            padding: 24px 22px;
+            backdrop-filter: blur(4px);
+            transition: border-color 0.3s, transform 0.3s;
+            flex-shrink: 0;
+        }
+        .testimonial-card:hover {
+            border-color: rgba(59, 130, 246, 0.25);
+            transform: translateY(-2px);
+        }
+        .testimonial-card .text {
+            color: #b8d4f0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .testimonial-card .author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .testimonial-card .author img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(59, 130, 246, 0.15);
+        }
+        .testimonial-card .author .name {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 0.95rem;
+        }
+        .testimonial-card .author .role {
+            font-size: 0.8rem;
+            color: #7aa9e0;
+        }
+
+        /* Айналмалы анимация – бағандар төмен жылжиды */
+        @keyframes scrollDown {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+        .scroll-column {
+            animation: scrollDown var(--duration, 18s) linear infinite;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding-bottom: 20px;
+        }
+        .scroll-column:hover {
+            animation-play-state: paused;
+        }
+
         /* ===== БАЙЛАНЫС ===== */
         .contact-wrapper {
             display: grid;
@@ -729,6 +893,21 @@
         }
 
         /* ===== АДАПТИВ ===== */
+        @media (max-width: 992px) {
+            .testimonials-column.lg {
+                display: none;
+            }
+            .testimonials-column.md {
+                display: flex;
+            }
+            .testimonials-grid {
+                gap: 16px;
+            }
+            .testimonials-column {
+                flex: 0 0 280px;
+            }
+        }
+
         @media (max-width: 768px) {
             .spotlight-nav .nav-item {
                 padding: 6px 12px;
@@ -789,6 +968,26 @@
             .spotlight-nav.open .spotlight-ambience {
                 display: none;
             }
+
+            .testimonials-column.md {
+                display: none;
+            }
+            .testimonials-column.lg {
+                display: none;
+            }
+            .testimonials-grid {
+                gap: 16px;
+            }
+            .testimonials-column {
+                flex: 0 0 260px;
+            }
+            .faq-question {
+                font-size: 0.95rem;
+                padding: 14px 18px;
+            }
+            .faq-answer {
+                font-size: 0.9rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -803,6 +1002,9 @@
             }
             .hero-name .char {
                 font-size: clamp(2rem, 10vw, 3.2rem);
+            }
+            .testimonials-column {
+                flex: 0 0 240px;
             }
         }
     </style>
@@ -831,7 +1033,9 @@
                     <a href="#projects" class="nav-item active" data-index="0">Жобалар</a>
                     <a href="#process" class="nav-item" data-index="1">Процесс</a>
                     <a href="#services" class="nav-item" data-index="2">Қызметтер</a>
-                    <a href="#contact" class="nav-item" data-index="3">Байланыс</a>
+                    <a href="#faq" class="nav-item" data-index="3">FAQ</a>
+                    <a href="#testimonials" class="nav-item" data-index="4">Пікірлер</a>
+                    <a href="#contact" class="nav-item" data-index="5">Байланыс</a>
                 </div>
 
                 <button class="hamburger" id="hamburger" aria-label="Мәзір">
@@ -849,7 +1053,6 @@
         <div class="hero-content">
             <div class="badge fade-up visible">Веб-разработчик &amp; Дизайнер</div>
 
-            <!-- Аты-жөні – бір бүтін жол -->
             <div class="hero-name" id="heroName">
                 <span class="char-wrap"><span class="char">Б</span></span>
                 <span class="char-wrap"><span class="char">е</span></span>
@@ -990,6 +1193,93 @@
         </div>
     </section>
 
+    <!-- ============================================================
+    FAQ – Жиі қойылатын сұрақтар
+    ============================================================ -->
+    <section id="faq">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag fade-up">FAQ</div>
+                <h2 class="fade-up delay-1">Жиі қойылатын сұрақтар</h2>
+                <p class="fade-up delay-2">Сізді қызықтыратын сұрақтарға жауаптар.</p>
+            </div>
+
+            <div class="faq-list fade-up delay-1">
+                <div class="faq-item active">
+                    <button class="faq-question">
+                        <span>Веб-сайт жасау қанша уақыт алады?</span>
+                        <span class="icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Жоба күрделілігіне байланысты. Қарапайым бір беттік сайт 5-7 жұмыс күнінде, ал интернет-магазин немесе көп беттік сайт 2-4 аптада дайын болады. Нақты мерзімді жоба талаптарын талқылағаннан кейін айтамын.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Сайтты өзім басқара аламын ба?</span>
+                        <span class="icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Иә, мен сайтты ыңғайлы админ панельмен (CMS) жабдықтаймын. Сіз мазмұнды өзіңіз жаңарта аласыз — мәтіндер, суреттер, жаңалықтар. Қажет болса, қысқаша нұсқаулық беремін.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Сайттың дизайнын өзгерте аламын ба?</span>
+                        <span class="icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Әрине. Мен жобаны бастамас бұрын дизайн-макет дайындаймын. Сіз макетті қарап, өзгерістер енгізе аласыз. Бекітілгеннен кейін ғана бастаймын. Кейін де шағын түзетулер жасап тұрамын.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Хостинг және домен туралы не білуім керек?</span>
+                        <span class="icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Мен сізге сенімді хостинг пен домен таңдауға көмектесемін. Қаласаңыз, мен өзім орналастырып беремін. Хостинг төлемі жыл сайын жасалады, ол клиенттің есебінен жүреді.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Қандай кепілдік бересіз?</span>
+                        <span class="icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Жобаны тапсырғаннан кейін 1 ай бойы тегін техникалық қолдау көрсетемін. Егер ақаулықтар табылса, оларды тегін түзетемін. Сондай-ақ, сайттың кодтары толығымен сізге тиесілі.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    ПІКІРЛЕР (Testimonials)
+    ============================================================ -->
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag fade-up">Пікірлер</div>
+                <h2 class="fade-up delay-1">Клиенттер не дейді</h2>
+                <p class="fade-up delay-2">Менімен жұмыс істегендердің пікірлері.</p>
+            </div>
+
+            <div class="testimonials-grid" id="testimonialsGrid">
+                <!-- 1-баған -->
+                <div class="testimonials-column" id="col1"></div>
+                <!-- 2-баған (орта) -->
+                <div class="testimonials-column md" id="col2"></div>
+                <!-- 3-баған (үлкен) -->
+                <div class="testimonials-column lg" id="col3"></div>
+            </div>
+        </div>
+    </section>
+
     <!-- ===== БАЙЛАНЫС ===== -->
     <section id="contact">
         <div class="container">
@@ -1054,7 +1344,9 @@
         </div>
     </div>
 
-    <!-- ===== JAVASCRIPT ===== -->
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
     <script>
         // ===== 1. Hero – әріптерді ашу =====
         document.addEventListener('DOMContentLoaded', function() {
@@ -1130,7 +1422,121 @@
             spotNav?.classList.toggle('open');
         });
 
-        // ===== 4. Сервис опциялары =====
+        // ===== 4. FAQ аккордеон =====
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const item = this.parentElement;
+                const isActive = item.classList.contains('active');
+
+                // Барлығын жабу
+                document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+
+                // Егер бұрын белсенді болмаса, ашамыз
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // ===== 5. Пікірлер – айналмалы бағандар =====
+        (function testimonials() {
+            const testimonialsData = [{
+                text: "Бекзаттың жұмысына ризамын! Сайт тез әрі сапалы жасалды. Өте кәсіби маман.",
+                image: "https://randomuser.me/api/portraits/women/1.jpg",
+                name: "Айгүл Нұрланқызы",
+                role: "DERO MEBEL негізін қалаушы"
+            }, {
+                text: "Веб-сайтты жасау барысында Бекзат барлық талаптарды ескерді. Нәтиже керемет!",
+                image: "https://randomuser.me/api/portraits/men/2.jpg",
+                name: "Ерлан Сейтжанов",
+                role: "Delicious мейрамханасының директоры"
+            }, {
+                text: "Біздің автосервиске арналған сайтты Бекзат жасап берді. Клиенттер ағыны артты.",
+                image: "https://randomuser.me/api/portraits/women/3.jpg",
+                name: "Меруерт Қасымова",
+                role: "ADAL AVTO маркетинг директоры"
+            }, {
+                text: "Стоматология клиникасына сайт жасаттым. Пациенттер онлайн жазыла бастады. Өте ыңғайлы!",
+                image: "https://randomuser.me/api/portraits/men/4.jpg",
+                name: "Дәрмен Әшімов",
+                role: "SmileDent бас дәрігері"
+            }, {
+                text: "Бекзат шынайы кәсіпқой. Оның дизайны мен кодтары өте таза. Ұсынамын!",
+                image: "https://randomuser.me/api/portraits/women/5.jpg",
+                name: "Жанна Әлібекова",
+                role: "Жоба менеджері"
+            }, {
+                text: "Интернет-магазиніміздің сайтын жасады. Сатылым 30%-ға өсті. Рахмет!",
+                image: "https://randomuser.me/api/portraits/men/6.jpg",
+                name: "Бауыржан Мұсаев",
+                role: "CEO, E-commerce"
+            }, {
+                text: "Өте жылдам әрі сапалы жұмыс. Бекзат барлық уақытында тапсырды. Супер!",
+                image: "https://randomuser.me/api/portraits/women/7.jpg",
+                name: "Ләззат Жұмабекова",
+                role: "Стартап негізін қалаушы"
+            }, {
+                text: "Сайттың дизайны мен функционалы бәрі де жоғары деңгейде. Кеңес беремін.",
+                image: "https://randomuser.me/api/portraits/men/8.jpg",
+                name: "Руслан Сағындықов",
+                role: "IT директоры"
+            }, {
+                text: "Бекзатпен жұмыс істеу үлкен ләззат. Ол клиенттің қажеттіліктерін терең түсінеді.",
+                image: "https://randomuser.me/api/portraits/women/9.jpg",
+                name: "Гүлмира Төлегенова",
+                role: "Бизнес-консультант"
+            }];
+
+            // 3 бағанға бөлу
+            const col1Data = testimonialsData.slice(0, 3);
+            const col2Data = testimonialsData.slice(3, 6);
+            const col3Data = testimonialsData.slice(6, 9);
+
+            function renderColumn(containerId, data, duration) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+
+                const wrapper = document.createElement('div');
+                wrapper.className = 'scroll-column';
+                wrapper.style.setProperty('--duration', duration + 's');
+
+                // 2 рет қайталап толтырамыз (айналмалы эффект үшін)
+                const doubled = [...data, ...data];
+                doubled.forEach((item, idx) => {
+                    const card = document.createElement('div');
+                    card.className = 'testimonial-card';
+                    card.innerHTML = `
+                        <div class="text">"${item.text}"</div>
+                        <div class="author">
+                            <img src="${item.image}" alt="${item.name}" loading="lazy" />
+                            <div>
+                                <div class="name">${item.name}</div>
+                                <div class="role">${item.role}</div>
+                            </div>
+                        </div>
+                    `;
+                    wrapper.appendChild(card);
+                });
+
+                container.appendChild(wrapper);
+            }
+
+            renderColumn('col1', col1Data, 16);
+            renderColumn('col2', col2Data, 20);
+            renderColumn('col3', col3Data, 18);
+
+            // Hover кезінде анимацияны тоқтату
+            document.querySelectorAll('.scroll-column').forEach(col => {
+                col.addEventListener('mouseenter', () => {
+                    col.style.animationPlayState = 'paused';
+                });
+                col.addEventListener('mouseleave', () => {
+                    col.style.animationPlayState = 'running';
+                });
+            });
+        })();
+
+        // ===== 6. Сервис опциялары =====
         const cards = document.querySelectorAll('.service-card');
         cards.forEach(card => {
             card.addEventListener('click', function() {
@@ -1141,7 +1547,7 @@
             });
         });
 
-        // ===== 5. Форма – WhatsApp =====
+        // ===== 7. Форма – WhatsApp =====
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -1160,7 +1566,7 @@
             window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
         });
 
-        // ===== 6. Fade анимациялары =====
+        // ===== 8. Fade анимациялары =====
         const fadeEls = document.querySelectorAll('.fade-up, .fade-left, .fade-right, .fade-scale');
 
         const obs = new IntersectionObserver((entries) => {
