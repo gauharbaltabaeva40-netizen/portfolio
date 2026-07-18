@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Бекзат Шеметаев — Веб-разработчик & Дизайнер</title>
 
+    <!-- SEO -->
     <meta name="description" content="Бекзат Шеметаев — веб-разработчик және дизайнер. Заманауи веб-тәжірибелер." />
     <meta name="keywords" content="веб-разработчик, веб-дизайнер, UI/UX, портфолио, Астана" />
     <meta name="author" content="Бекзат Шеметаев" />
-    <meta property="og:title" content="Бекзат Шеметаев — Веб-разработчик" />
-    <meta property="og:description" content="Заманауи, пайдаланушыға бағытталған веб-тәжірибелер." />
-    <meta property="og:type" content="website" />
 
     <style>
         /* ============================================================
@@ -51,7 +49,7 @@
 
         /* ===== SCROLLBAR ===== */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
         ::-webkit-scrollbar-track {
             background: #0a1a2e;
@@ -60,29 +58,52 @@
             background: #2a6bb0;
             border-radius: 4px;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #4a8fd4;
-        }
 
-        /* ===== АНИМАЦИЯЛЫҚ КЛАСТАР (Fade) ===== */
-        .anim-fade-up {
+        /* ============================================================
+           АНИМАЦИЯЛЫҚ КЛАСТАР (Fade)
+           ============================================================ */
+        .fade-up {
             opacity: 0;
             transform: translateY(50px);
-            transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .anim-fade-left {
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-left {
             opacity: 0;
             transform: translateX(-50px);
-            transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .anim-fade-right {
+        .fade-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fade-right {
             opacity: 0;
             transform: translateX(50px);
-            transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .anim-visible {
-            opacity: 1 !important;
-            transform: translateX(0) translateY(0) scale(1) !important;
+        .fade-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fade-scale {
+            opacity: 0;
+            transform: scale(0.92);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .fade-scale.visible {
+            opacity: 1;
+            transform: scale(1);
         }
 
         .delay-1 {
@@ -97,8 +118,13 @@
         .delay-4 {
             transition-delay: 0.32s;
         }
+        .delay-5 {
+            transition-delay: 0.40s;
+        }
 
-        /* ===== ТИПОГРАФИЯ ===== */
+        /* ============================================================
+           ТИПОГРАФИЯ
+           ============================================================ */
         h1,
         h2,
         h3,
@@ -108,15 +134,15 @@
             color: #ffffff;
         }
         h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
-            line-height: 1.1;
+            font-size: clamp(3.2rem, 10vw, 7rem);
+            line-height: 1.05;
         }
         h2 {
-            font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+            font-size: clamp(2.2rem, 5vw, 3.4rem);
             margin-bottom: 12px;
         }
         h3 {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin-bottom: 6px;
         }
         p,
@@ -125,25 +151,27 @@
         }
 
         .section-tag {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             color: #7aa9e0;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: 700;
         }
 
         /* ============================================================
-           СПОТЛИТ НАВИГАЦИЯ (SpotlightNavbar)
+           HEADER / НАВИГАЦИЯ (Spotlight)
            ============================================================ */
         header {
-            padding: 20px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            position: sticky;
+            position: fixed;
             top: 0;
-            background: rgba(10, 22, 40, 0.88);
-            backdrop-filter: blur(14px);
-            z-index: 100;
+            left: 0;
+            width: 100%;
+            padding: 18px 0;
+            background: rgba(10, 22, 40, 0.75);
+            backdrop-filter: blur(16px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         nav {
@@ -168,7 +196,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 0 24px rgba(59, 130, 246, 0.25);
         }
         .logo-icon svg {
             width: 26px;
@@ -181,7 +209,7 @@
         }
 
         .logo-text {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 700;
             letter-spacing: 1px;
             color: #ffffff;
@@ -195,28 +223,24 @@
             position: relative;
             display: flex;
             align-items: center;
-            height: 44px;
-            padding: 0 8px;
+            gap: 4px;
+            padding: 4px 8px;
             border-radius: 40px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(8px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            gap: 2px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(4px);
         }
 
         .spotlight-nav .nav-item {
-            position: relative;
             padding: 8px 18px;
-            border-radius: 40px;
-            font-size: 0.9rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
             font-weight: 600;
-            color: #b8d4f0;
+            color: #8ab0d8;
             cursor: pointer;
             transition: color 0.3s;
+            position: relative;
             z-index: 5;
-            font-family: 'Georgia', serif;
-            letter-spacing: 0.5px;
         }
         .spotlight-nav .nav-item.active {
             color: #ffffff;
@@ -227,15 +251,12 @@
 
         .spotlight-glow {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             pointer-events: none;
             z-index: 1;
             border-radius: 40px;
-            background: radial-gradient(120px circle at var(--spot-x, 50%) 100%,
-                    rgba(255, 255, 255, 0.07) 0%,
+            background: radial-gradient(120px circle at var(--spot-x, 50%) 50%,
+                    rgba(255, 255, 255, 0.06) 0%,
                     transparent 70%);
             opacity: 0;
             transition: opacity 0.25s;
@@ -246,20 +267,19 @@
 
         .spotlight-ambience {
             position: absolute;
-            bottom: 0;
+            bottom: 4px;
             left: 0;
             width: 100%;
             height: 2px;
             pointer-events: none;
             z-index: 2;
             border-radius: 2px;
-            background: radial-gradient(60px circle at var(--amb-x, 50%) 0%,
+            background: radial-gradient(60px circle at var(--amb-x, 50%) 50%,
                     #3b82f6 0%,
                     transparent 100%);
             transition: background 0.3s;
         }
 
-        /* Мобильді мәзір */
         .hamburger {
             display: none;
             flex-direction: column;
@@ -279,83 +299,71 @@
         }
 
         /* ============================================================
-           HERO (ULKEN + AnimatedRays)
+           HERO (толық экран + AnimatedRays)
            ============================================================ */
-        .hero-wrapper {
+        .hero-wrap {
             position: relative;
             width: 100%;
-            min-height: 100vh;
+            height: 100vh;
+            min-height: 700px;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            padding: 40px 0;
-            margin-top: -20px;
+            margin-top: 0;
+            background: #0a1628;
         }
 
-        /* AnimatedRays – фондық сәулелер */
+        /* AnimatedRays – фон */
         .rays-bg {
             position: absolute;
             inset: 0;
             background-image:
                 repeating-linear-gradient(100deg,
-                    rgba(96, 165, 250, 0.12) 0%,
-                    rgba(96, 165, 250, 0.12) 7%,
-                    transparent 10%,
-                    transparent 12%,
-                    rgba(96, 165, 250, 0.12) 16%),
+                    rgba(96, 165, 250, 0.10) 0%,
+                    rgba(96, 165, 250, 0.10) 6%,
+                    transparent 9%,
+                    transparent 11%,
+                    rgba(96, 165, 250, 0.10) 15%),
                 repeating-linear-gradient(100deg,
-                    #60a5fa 10%,
-                    #e879f9 15%,
+                    #60a5fa 8%,
+                    #e879f9 14%,
                     #60a5fa 20%,
-                    #5eead4 25%,
-                    #60a5fa 30%);
-            background-size: 300%, 200%;
+                    #5eead4 26%,
+                    #60a5fa 32%);
+            background-size: 400%, 300%;
             background-position: 50% 50%, 50% 50%;
-            filter: blur(8px) opacity(0.4) saturate(200%);
-            mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
-            -webkit-mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
-            animation: raysMove 14s linear infinite alternate;
-            z-index: 0;
+            filter: blur(14px) opacity(0.45) saturate(180%);
+            mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 80%);
+            animation: raysDrift 14s ease-in-out infinite alternate;
+            z-index: 1;
         }
-        @keyframes raysMove {
+
+        @keyframes raysDrift {
             0% {
                 background-position: 0% 50%, 0% 50%;
+                transform: scale(1) rotate(0deg);
             }
             100% {
                 background-position: 100% 50%, 100% 50%;
+                transform: scale(1.05) rotate(2deg);
             }
         }
 
-        /* Екінші сәуле қабаты (қозғалатын) */
+        /* Қосымша жарқыл (қабат) */
         .rays-overlay {
             position: absolute;
             inset: 0;
-            background-image:
-                repeating-linear-gradient(110deg,
-                    transparent 0%,
-                    rgba(59, 130, 246, 0.05) 5%,
-                    transparent 10%,
-                    transparent 15%,
-                    rgba(147, 197, 253, 0.04) 20%,
-                    transparent 25%);
-            background-size: 400% 100%;
-            animation: raysOverlay 18s linear infinite alternate;
-            z-index: 0;
+            background: radial-gradient(ellipse at 30% 40%, rgba(59, 130, 246, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 60%, rgba(147, 197, 253, 0.05) 0%, transparent 50%);
+            z-index: 2;
             pointer-events: none;
-        }
-        @keyframes raysOverlay {
-            0% {
-                background-position: 0% 0%;
-            }
-            100% {
-                background-position: 100% 0%;
-            }
         }
 
         .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 3;
             text-align: center;
             max-width: 900px;
             padding: 0 24px;
@@ -363,57 +371,68 @@
 
         .hero-content .badge {
             display: inline-block;
-            border: 1px solid rgba(59, 130, 246, 0.4);
-            padding: 8px 24px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 6px 24px;
             border-radius: 40px;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 4px;
             color: #93c5fd;
-            margin-bottom: 28px;
             font-weight: 600;
-            background: rgba(59, 130, 246, 0.08);
+            background: rgba(59, 130, 246, 0.06);
+            margin-bottom: 28px;
         }
 
-        .hero-content h1 {
-            margin-bottom: 24px;
+        /* Аты-жөні – әріптер жеке ашылады */
+        .hero-name {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.04em;
+            margin-bottom: 16px;
         }
-        .hero-content h1 .highlight {
+        .hero-name .char-wrap {
+            display: inline-block;
+            overflow: hidden;
+        }
+        .hero-name .char {
+            display: inline-block;
+            transform: translateY(120%);
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            font-size: clamp(3.2rem, 10vw, 7rem);
+            font-weight: 700;
+            color: #ffffff;
             background: linear-gradient(135deg, #ffffff, #93c5fd);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
-        /* Әріптердің жеке ашылуы (футерден көшірілді) */
-        .hero-content h1 .char {
-            display: inline-block;
-            transform: translateY(120%);
-            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-            -webkit-text-fill-color: currentColor;
-        }
-        .hero-content h1 .char.revealed {
+        .hero-name .char.revealed {
             transform: translateY(0);
         }
+        /* Бос орын */
+        .hero-name .space {
+            width: 0.25em;
+        }
 
-        .hero-content p {
-            max-width: 640px;
-            margin: 0 auto 36px;
-            font-size: 1.2rem;
+        .hero-content .subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
             color: #b8d4f0;
-            line-height: 1.8;
+            max-width: 640px;
+            margin: 0 auto 28px;
+            line-height: 1.7;
         }
 
         .hero-content .availability {
             display: inline-block;
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             padding: 10px 32px;
             border-radius: 40px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             letter-spacing: 2px;
             color: #93c5fd;
             font-weight: 600;
-            background: rgba(59, 130, 246, 0.06);
+            background: rgba(59, 130, 246, 0.04);
         }
 
         /* ============================================================
@@ -421,7 +440,7 @@
            ============================================================ */
         section {
             padding: 80px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
         section:last-of-type {
             border-bottom: none;
@@ -429,7 +448,7 @@
 
         .section-header {
             text-align: center;
-            margin-bottom: 52px;
+            margin-bottom: 50px;
         }
         .section-header p {
             color: #9bb8e0;
@@ -438,56 +457,28 @@
             font-size: 1.05rem;
         }
 
-        /* Тақырыпшаларға астынан түсу анимациясы */
-        .section-tag.anim-slide-up {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .section-tag.anim-slide-up.anim-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        h2.anim-slide-up {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.9s ease-out, transform 0.9s ease-out;
-        }
-        h2.anim-slide-up.anim-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-header p.anim-slide-up {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .section-header p.anim-slide-up.anim-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ===== ЖОБАЛАР ===== */
+        /* ============================================================
+           ЖОБАЛАР
+           ============================================================ */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 32px;
         }
+
         .project-card {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(59, 130, 246, 0.2);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(59, 130, 246, 0.12);
             border-radius: 16px;
             padding: 28px 24px 24px;
-            transition: transform 0.4s, border-color 0.4s, box-shadow 0.4s;
+            transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
             cursor: default;
             backdrop-filter: blur(4px);
         }
         .project-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-6px);
             border-color: #3b82f6;
-            box-shadow: 0 24px 48px -12px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 20px 48px -12px rgba(59, 130, 246, 0.2);
         }
         .project-card .project-number {
             font-size: 0.7rem;
@@ -500,7 +491,7 @@
             color: #fff;
         }
         .project-card .project-category {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             color: #7aa9e0;
@@ -517,7 +508,7 @@
             font-size: 0.85rem;
             font-weight: 600;
             color: #93c5fd;
-            border-bottom: 1.5px solid rgba(59, 130, 246, 0.3);
+            border-bottom: 1.5px solid rgba(59, 130, 246, 0.25);
             transition: border-color 0.25s, color 0.25s;
         }
         .project-card .project-link:hover {
@@ -525,24 +516,26 @@
             border-color: #3b82f6;
         }
 
-        /* ===== ПРОЦЕСС ===== */
+        /* ============================================================
+           ПРОЦЕСС
+           ============================================================ */
         .process-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 28px;
             text-align: center;
         }
+
         .process-step {
-            padding: 24px 12px;
+            padding: 24px 16px;
             border-radius: 12px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(59, 130, 246, 0.1);
-            transition: background 0.3s, border-color 0.3s, transform 0.3s;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(59, 130, 246, 0.06);
+            transition: background 0.3s, border-color 0.3s;
         }
         .process-step:hover {
-            background: rgba(59, 130, 246, 0.08);
+            background: rgba(59, 130, 246, 0.04);
             border-color: #3b82f6;
-            transform: scale(1.02);
         }
         .process-step .step-number {
             font-size: 2.6rem;
@@ -559,7 +552,9 @@
             color: #9bb8e0;
         }
 
-        /* ===== ҚЫЗМЕТТЕР (3D анимация) ===== */
+        /* ============================================================
+           ҚЫЗМЕТТЕР (3D анимация)
+           ============================================================ */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -568,10 +563,10 @@
         }
 
         .service-item {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(59, 130, 246, 0.15);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(59, 130, 246, 0.10);
             border-radius: 16px;
-            padding: 30px 18px;
+            padding: 32px 18px;
             text-align: center;
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             transform-style: preserve-3d;
@@ -580,18 +575,18 @@
             backdrop-filter: blur(4px);
         }
 
-        .service-item.anim-visible {
+        .service-item.visible {
             animation: servicePop 0.9s cubic-bezier(0.23, 1, 0.32, 1) forwards;
         }
 
         @keyframes servicePop {
             0% {
                 opacity: 0;
-                transform: rotateY(45deg) scale(0.7) translateZ(-50px);
+                transform: rotateY(35deg) scale(0.75) translateZ(-40px);
             }
             60% {
                 opacity: 1;
-                transform: rotateY(-5deg) scale(1.05) translateZ(10px);
+                transform: rotateY(-4deg) scale(1.04) translateZ(8px);
             }
             100% {
                 opacity: 1;
@@ -600,21 +595,21 @@
         }
 
         .service-item:hover {
-            transform: rotateY(10deg) scale(1.05) translateZ(20px);
+            transform: rotateY(8deg) scale(1.04) translateZ(16px);
             border-color: #3b82f6;
-            box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.5), inset 0 0 30px rgba(59, 130, 246, 0.1);
-            background: rgba(59, 130, 246, 0.1);
+            box-shadow: 0 24px 48px -12px rgba(59, 130, 246, 0.3);
+            background: rgba(59, 130, 246, 0.06);
         }
 
         .service-item .icon {
-            font-size: 2.6rem;
+            font-size: 2.8rem;
             margin-bottom: 10px;
             display: block;
-            filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.3));
+            filter: drop-shadow(0 0 16px rgba(59, 130, 246, 0.15));
             transition: transform 0.4s;
         }
         .service-item:hover .icon {
-            transform: scale(1.2) rotate(6deg);
+            transform: scale(1.15) rotate(4deg);
         }
         .service-item h4 {
             color: #ffffff;
@@ -624,9 +619,9 @@
             width: 40px;
             height: 3px;
             background: linear-gradient(90deg, transparent, #3b82f6, transparent);
-            margin: 10px auto 0;
+            margin: 12px auto 0;
             border-radius: 4px;
-            opacity: 0.5;
+            opacity: 0.4;
             transition: width 0.4s, opacity 0.4s;
         }
         .service-item:hover .glow-line {
@@ -634,7 +629,9 @@
             opacity: 1;
         }
 
-        /* ===== БАЙЛАНЫС ===== */
+        /* ============================================================
+           БАЙЛАНЫС
+           ============================================================ */
         .contact-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -654,7 +651,7 @@
         }
         .contact-info .contact-detail a {
             color: #93c5fd;
-            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.15);
             transition: border-color 0.25s;
         }
         .contact-info .contact-detail a:hover {
@@ -680,15 +677,15 @@
             border-color: #3b82f6;
         }
 
-        /* ===== ФОРМА ===== */
+        /* Форма */
         .contact-form {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
         .contact-form input {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(59, 130, 246, 0.2);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(59, 130, 246, 0.15);
             border-radius: 12px;
             padding: 14px 18px;
             font-family: inherit;
@@ -699,7 +696,7 @@
         }
         .contact-form input:focus {
             border-color: #3b82f6;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.08);
         }
         .contact-form input::placeholder {
             color: #6a8fb0;
@@ -710,9 +707,10 @@
             grid-template-columns: 1fr 1fr;
             gap: 12px;
         }
+
         .service-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 2px solid rgba(59, 130, 246, 0.15);
+            background: rgba(255, 255, 255, 0.02);
+            border: 2px solid rgba(59, 130, 246, 0.10);
             border-radius: 12px;
             padding: 14px 8px;
             text-align: center;
@@ -727,27 +725,27 @@
             gap: 4px;
         }
         .service-card:hover {
-            background: rgba(59, 130, 246, 0.08);
+            background: rgba(59, 130, 246, 0.06);
             border-color: #3b82f6;
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
         .service-card input[type="radio"] {
             display: none;
         }
         .service-card .emoji {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
         }
 
         .service-card.selected {
-            background: rgba(59, 130, 246, 0.2);
+            background: rgba(59, 130, 246, 0.12);
             border-color: #3b82f6;
-            box-shadow: 0 0 25px rgba(59, 130, 246, 0.3), inset 0 0 20px rgba(59, 130, 246, 0.05);
-            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.15);
+            transform: scale(1.03);
             color: #ffffff;
-            animation: cardPulse 0.5s ease;
+            animation: cardPop 0.4s ease;
         }
 
-        @keyframes cardPulse {
+        @keyframes cardPop {
             0% {
                 transform: scale(1);
             }
@@ -755,7 +753,7 @@
                 transform: scale(1.08);
             }
             100% {
-                transform: scale(1.02);
+                transform: scale(1.03);
             }
         }
 
@@ -766,25 +764,27 @@
             border-radius: 40px;
             padding: 16px 32px;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             cursor: pointer;
             transition: all 0.3s;
             font-family: inherit;
             letter-spacing: 0.5px;
-            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 8px 28px rgba(59, 130, 246, 0.25);
         }
         .contact-form button:hover {
             background: linear-gradient(135deg, #1d4ed8, #2563eb);
-            transform: translateY(-2px) scale(1.01);
-            box-shadow: 0 12px 32px rgba(59, 130, 246, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 36px rgba(59, 130, 246, 0.35);
         }
 
-        /* ===== FOOTER (қарапайым) ===== */
-        .site-footer {
-            padding: 40px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        /* ============================================================
+           FOOTER (қарапайым)
+           ============================================================ */
+        .footer-bottom {
+            padding: 32px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
             text-align: center;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #4a7ab0;
             background: #0a1628;
         }
@@ -795,38 +795,10 @@
         @media (max-width: 768px) {
             .spotlight-nav .nav-item {
                 padding: 6px 12px;
-                font-size: 0.8rem;
+                font-size: 0.75rem;
             }
             .spotlight-nav {
-                gap: 0;
-                height: 40px;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
-            .spotlight-nav.open {
-                flex-direction: column;
-                height: auto;
-                padding: 16px 12px;
-                border-radius: 16px;
-                background: rgba(10, 22, 40, 0.98);
-                border: 1px solid rgba(255, 255, 255, 0.06);
-                position: absolute;
-                top: 70px;
-                right: 20px;
-                width: 200px;
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-            }
-            .spotlight-nav.open .nav-item {
-                padding: 10px 16px;
-                width: 100%;
-                text-align: center;
-            }
-            .spotlight-nav.open .spotlight-glow,
-            .spotlight-nav.open .spotlight-ambience {
-                display: none;
+                padding: 4px 6px;
             }
 
             .contact-wrapper {
@@ -834,14 +806,13 @@
                 gap: 32px;
             }
 
-            .hero-wrapper {
-                min-height: 80vh;
-                padding: 30px 0;
+            .hero-wrap {
+                min-height: 600px;
             }
-            .hero-content h1 {
-                font-size: clamp(2.4rem, 10vw, 3.6rem);
+            .hero-name .char {
+                font-size: clamp(2.6rem, 12vw, 4.2rem);
             }
-            .hero-content p {
+            .hero-content .subtitle {
                 font-size: 1rem;
             }
 
@@ -857,6 +828,34 @@
             .service-options {
                 grid-template-columns: 1fr 1fr;
             }
+
+            .hamburger {
+                display: flex;
+            }
+            .spotlight-nav .nav-item:not(.active) {
+                display: none;
+            }
+            .spotlight-nav.open .nav-item {
+                display: block;
+            }
+            .spotlight-nav.open {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 4px;
+                padding: 12px 16px;
+                border-radius: 16px;
+                background: rgba(10, 22, 40, 0.96);
+                border-color: rgba(59, 130, 246, 0.2);
+                position: absolute;
+                top: 60px;
+                right: 12px;
+                min-width: 180px;
+                backdrop-filter: blur(20px);
+            }
+            .spotlight-nav.open .spotlight-glow,
+            .spotlight-nav.open .spotlight-ambience {
+                display: none;
+            }
         }
 
         @media (max-width: 480px) {
@@ -869,15 +868,17 @@
             .service-options {
                 grid-template-columns: 1fr;
             }
-            .hero-content h1 {
-                font-size: clamp(2rem, 12vw, 2.8rem);
+            .hero-name .char {
+                font-size: clamp(2rem, 10vw, 3.2rem);
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== HEADER (SpotlightNavbar) ===== -->
+    <!-- ============================================================
+    HEADER / НАВИГАЦИЯ
+    ============================================================ -->
     <header>
         <div class="container">
             <nav>
@@ -909,58 +910,82 @@
         </div>
     </header>
 
-    <!-- ===== HERO + AnimatedRays (үлкен) ===== -->
-    <div class="hero-wrapper">
+    <!-- ============================================================
+    HERO (толық экран + AnimatedRays + әріптер анимациясы)
+    ============================================================ -->
+    <section class="hero-wrap" id="hero">
+        <!-- AnimatedRays -->
         <div class="rays-bg"></div>
         <div class="rays-overlay"></div>
 
         <div class="hero-content">
-            <div class="badge anim-fade-up">Веб-разработчик &amp; Дизайнер</div>
-            <h1 class="anim-fade-up delay-1" id="heroTitle">
-                <span class="char">Б</span><span class="char">е</span><span class="char">к</span><span class="char">з</span><span class="char">а</span><span class="char">т</span>
-                <span class="highlight">
-                    <span class="char">Ш</span><span class="char">е</span><span class="char">м</span><span class="char">е</span><span class="char">т</span><span class="char">а</span><span class="char">е</span><span class="char">в</span>
-                </span>
-            </h1>
-            <p class="anim-fade-up delay-2">
+            <div class="badge fade-up visible">Веб-разработчик &amp; Дизайнер</div>
+
+            <!-- Аты-жөні – әріптер жеке ашылады -->
+            <div class="hero-name" id="heroName">
+                <span class="char-wrap"><span class="char">Б</span></span>
+                <span class="char-wrap"><span class="char">е</span></span>
+                <span class="char-wrap"><span class="char">к</span></span>
+                <span class="char-wrap"><span class="char">з</span></span>
+                <span class="char-wrap"><span class="char">а</span></span>
+                <span class="char-wrap"><span class="char">т</span></span>
+                <span class="space"></span>
+                <span class="char-wrap"><span class="char">Ш</span></span>
+                <span class="char-wrap"><span class="char">е</span></span>
+                <span class="char-wrap"><span class="char">м</span></span>
+                <span class="char-wrap"><span class="char">е</span></span>
+                <span class="char-wrap"><span class="char">т</span></span>
+                <span class="char-wrap"><span class="char">а</span></span>
+                <span class="char-wrap"><span class="char">е</span></span>
+                <span class="char-wrap"><span class="char">в</span></span>
+            </div>
+
+            <p class="subtitle fade-up visible delay-1">
                 Заманауи, пайдаланушыға бағытталған веб-тәжірибелерді жобалаймын.
                 Таза дизайн, тегіс өзара әрекеттесу және мәнді детальдар.
             </p>
-            <div class="availability anim-fade-up delay-3">Қолжетімді — Қазақстан</div>
-        </div>
-    </div>
 
-    <!-- ===== ЖОБАЛАР ===== -->
+            <div class="availability fade-up visible delay-2">Қолжетімді — Қазақстан</div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    ЖОБАЛАР
+    ============================================================ -->
     <section id="projects">
         <div class="container">
             <div class="section-header">
-                <div class="section-tag anim-slide-up">Таңдаулы жобалар</div>
-                <h2 class="anim-slide-up delay-1">Соңғы жұмыстарым</h2>
-                <p class="anim-slide-up delay-2">Әр жоба — бірегей міндеттерге арналған шешім.</p>
+                <div class="section-tag fade-up">Таңдаулы жобалар</div>
+                <h2 class="fade-up delay-1">Соңғы жұмыстарым</h2>
+                <p class="fade-up delay-2">Әр жоба — бірегей міндеттерге арналған шешім.</p>
             </div>
+
             <div class="projects-grid">
-                <div class="project-card anim-fade-up delay-1">
+                <div class="project-card fade-up delay-1">
                     <div class="project-number">01</div>
                     <h3>DERO MEBEL</h3>
                     <div class="project-category">Интернет-магазин</div>
                     <p class="project-desc">Премиум жиһаз бренді. Ыңғайлы каталог және төлем.</p>
                     <a href="https://dero-mebel-kz.vercel.app/" target="_blank" class="project-link">Сайтты көру →</a>
                 </div>
-                <div class="project-card anim-fade-up delay-2">
+
+                <div class="project-card fade-up delay-2">
                     <div class="project-number">02</div>
                     <h3>Delicious</h3>
                     <div class="project-category">Бір беттік сайт</div>
                     <p class="project-desc">Мейрамхана визиткасы. Әдемі интерьер және мәзір.</p>
                     <a href="https://delicious-restaurnat.vercel.app/" target="_blank" class="project-link">Сайтты көру →</a>
                 </div>
-                <div class="project-card anim-fade-up delay-3">
+
+                <div class="project-card fade-up delay-3">
                     <div class="project-number">03</div>
                     <h3>ADAL AVTO</h3>
                     <div class="project-category">Көп беттік сайт</div>
                     <p class="project-desc">Автосервис орталығы. Қызметтер, диагностика, жазылу.</p>
                     <a href="https://v0-auto-service-landing-page-three.vercel.app/" target="_blank" class="project-link">Сайтты көру →</a>
                 </div>
-                <div class="project-card anim-fade-up delay-4">
+
+                <div class="project-card fade-up delay-4">
                     <div class="project-number">04</div>
                     <h3>SmileDent</h3>
                     <div class="project-category">Курс платформасы</div>
@@ -971,31 +996,34 @@
         </div>
     </section>
 
-    <!-- ===== ПРОЦЕСС ===== -->
+    <!-- ============================================================
+    ПРОЦЕСС
+    ============================================================ -->
     <section id="process">
         <div class="container">
             <div class="section-header">
-                <div class="section-tag anim-slide-up">Жұмыс процесі</div>
-                <h2 class="anim-slide-up delay-1">Қалай жұмыс істеймін</h2>
-                <p class="anim-slide-up delay-2">Әр жобаны сапалы жеткізу үшін кезеңдер.</p>
+                <div class="section-tag fade-up">Жұмыс процесі</div>
+                <h2 class="fade-up delay-1">Қалай жұмыс істеймін</h2>
+                <p class="fade-up delay-2">Әр жобаны сапалы жеткізу үшін кезеңдер.</p>
             </div>
+
             <div class="process-grid">
-                <div class="process-step anim-fade-up delay-1">
+                <div class="process-step fade-up delay-1">
                     <div class="step-number">01</div>
                     <h4>Зерттеу</h4>
                     <p>Мақсат, аудитория және талаптарды талдау.</p>
                 </div>
-                <div class="process-step anim-fade-up delay-2">
+                <div class="process-step fade-up delay-2">
                     <div class="step-number">02</div>
                     <h4>Дизайн</h4>
                     <p>Прототиптер, макеттер және визуалдар.</p>
                 </div>
-                <div class="process-step anim-fade-up delay-3">
+                <div class="process-step fade-up delay-3">
                     <div class="step-number">03</div>
                     <h4>Тестілеу</h4>
                     <p>Функционалдық, юзабилити және браузерлер.</p>
                 </div>
-                <div class="process-step anim-fade-up delay-4">
+                <div class="process-step fade-up delay-4">
                     <div class="step-number">04</div>
                     <h4>Жеткізу</h4>
                     <p>Хостингке орналастыру және қолдау.</p>
@@ -1004,31 +1032,34 @@
         </div>
     </section>
 
-    <!-- ===== ҚЫЗМЕТТЕР ===== -->
+    <!-- ============================================================
+    ҚЫЗМЕТТЕР (3D анимация)
+    ============================================================ -->
     <section id="services">
         <div class="container">
             <div class="section-header">
-                <div class="section-tag anim-slide-up">Қызметтер</div>
-                <h2 class="anim-slide-up delay-1">Не ұсынамын</h2>
-                <p class="anim-slide-up delay-2">Бизнесіңізге арналған веб-шешімдер.</p>
+                <div class="section-tag fade-up">Қызметтер</div>
+                <h2 class="fade-up delay-1">Не ұсынамын</h2>
+                <p class="fade-up delay-2">Бизнесіңізге арналған веб-шешімдер.</p>
             </div>
+
             <div class="services-grid">
-                <div class="service-item anim-fade-up delay-1">
+                <div class="service-item fade-up delay-1">
                     <span class="icon">📄</span>
                     <h4>Бір беттік сайт</h4>
                     <div class="glow-line"></div>
                 </div>
-                <div class="service-item anim-fade-up delay-2">
+                <div class="service-item fade-up delay-2">
                     <span class="icon">🏢</span>
                     <h4>Көп беттік сайт</h4>
                     <div class="glow-line"></div>
                 </div>
-                <div class="service-item anim-fade-up delay-3">
+                <div class="service-item fade-up delay-3">
                     <span class="icon">🛒</span>
                     <h4>Интернет-магазин</h4>
                     <div class="glow-line"></div>
                 </div>
-                <div class="service-item anim-fade-up delay-4">
+                <div class="service-item fade-up delay-4">
                     <span class="icon">🎓</span>
                     <h4>Курс платформасы</h4>
                     <div class="glow-line"></div>
@@ -1037,17 +1068,19 @@
         </div>
     </section>
 
-    <!-- ===== БАЙЛАНЫС ===== -->
+    <!-- ============================================================
+    БАЙЛАНЫС / ФОРМА
+    ============================================================ -->
     <section id="contact">
         <div class="container">
             <div class="section-header">
-                <div class="section-tag anim-slide-up">Байланыс</div>
-                <h2 class="anim-slide-up delay-1">Жобаңызды талқылайық</h2>
-                <p class="anim-slide-up delay-2">Төмендегі форманы толтырып, WhatsApp арқылы жіберіңіз.</p>
+                <div class="section-tag fade-up">Байланыс</div>
+                <h2 class="fade-up delay-1">Жобаңызды талқылайық</h2>
+                <p class="fade-up delay-2">Төмендегі форманы толтырып, WhatsApp арқылы жіберіңіз.</p>
             </div>
 
             <div class="contact-wrapper">
-                <div class="contact-info anim-fade-left">
+                <div class="contact-info fade-left">
                     <h3>Бекзат Шеметаев</h3>
                     <p>Веб-разработчик &amp; Дизайнер</p>
                     <div class="contact-detail">
@@ -1061,7 +1094,7 @@
                     </div>
                 </div>
 
-                <form class="contact-form anim-fade-right" id="contactForm">
+                <form class="contact-form fade-right" id="contactForm">
                     <input type="text" name="name" placeholder="Аты-жөніңіз" required />
                     <input type="text" name="industry" placeholder="Қандай сала? (мысалы: Мейрамхана, Автосервис)" required />
 
@@ -1094,37 +1127,33 @@
         </div>
     </section>
 
-    <!-- ===== FOOTER ===== -->
-    <footer class="site-footer">
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <div class="footer-bottom">
         <div class="container">
             <p>© 2026 Бекзат Шеметаев. Барлық құқықтар қорғалған.</p>
         </div>
-    </footer>
+    </div>
 
     <!-- ============================================================
     JAVASCRIPT
     ============================================================ -->
     <script>
         // =============================================
-        // 1. Мәзір (мобильді)
+        // 1. Hero – әріптерді ашу (скролл емес, бет жүктелгенде)
         // =============================================
-        const hamburger = document.getElementById('hamburger');
-        const spotlightNav = document.getElementById('spotlightNav');
-
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            spotlightNav.classList.toggle('open');
-        });
-
-        document.querySelectorAll('.spotlight-nav .nav-item').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                spotlightNav.classList.remove('open');
+        document.addEventListener('DOMContentLoaded', function() {
+            const chars = document.querySelectorAll('#heroName .char');
+            chars.forEach((ch, i) => {
+                setTimeout(() => {
+                    ch.classList.add('revealed');
+                }, 120 + i * 45);
             });
         });
 
         // =============================================
-        // 2. Spotlight Navbar эффектісі
+        // 2. Spotlight Navbar
         // =============================================
         (function spotlight() {
             const nav = document.getElementById('spotlightNav');
@@ -1132,7 +1161,6 @@
             const glow = document.getElementById('spotlightGlow');
             const ambience = document.getElementById('spotlightAmbience');
             const items = nav.querySelectorAll('.nav-item');
-
             let activeIndex = 0;
 
             function setActive(index) {
@@ -1157,8 +1185,8 @@
                 glow.style.setProperty('--spot-x', x + 'px');
             });
 
-            nav.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
             nav.addEventListener('mouseenter', () => { glow.style.opacity = '1'; });
+            nav.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
 
             items.forEach((item, index) => {
                 item.addEventListener('click', (e) => {
@@ -1166,9 +1194,12 @@
                     setActive(index);
                     const href = item.getAttribute('href');
                     if (href) document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+                    // Мобильді мәзірді жабу
+                    nav.classList.remove('open');
                 });
             });
 
+            // Бастапқы орны
             window.addEventListener('load', () => {
                 const activeEl = items[activeIndex];
                 if (activeEl && ambience) {
@@ -1181,36 +1212,23 @@
         })();
 
         // =============================================
-        // 3. Hero әріптерінің ашылуы (скролл кезінде)
+        // 3. Мобильді мәзір
         // =============================================
-        (function heroChars() {
-            const chars = document.querySelectorAll('#heroTitle .char');
-            const hero = document.querySelector('.hero-wrapper');
+        const hamburger = document.getElementById('hamburger');
+        const spotNav = document.getElementById('spotlightNav');
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        chars.forEach((ch, i) => {
-                            setTimeout(() => {
-                                ch.classList.add('revealed');
-                            }, i * 50);
-                        });
-                    } else {
-                        chars.forEach(ch => ch.classList.remove('revealed'));
-                    }
-                });
-            }, { threshold: 0.3 });
-
-            if (hero) observer.observe(hero);
-        })();
+        hamburger?.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            spotNav?.classList.toggle('open');
+        });
 
         // =============================================
         // 4. Сервис опцияларын таңдау
         // =============================================
-        const serviceCards = document.querySelectorAll('.service-card');
-        serviceCards.forEach(card => {
+        const cards = document.querySelectorAll('.service-card');
+        cards.forEach(card => {
             card.addEventListener('click', function() {
-                serviceCards.forEach(c => c.classList.remove('selected'));
+                cards.forEach(c => c.classList.remove('selected'));
                 const radio = this.querySelector('input[type="radio"]');
                 radio.checked = true;
                 this.classList.add('selected');
@@ -1218,61 +1236,54 @@
         });
 
         // =============================================
-        // 5. Форма (WhatsApp)
+        // 5. Форма – WhatsApp
         // =============================================
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
             const name = this.querySelector('input[name="name"]').value.trim();
             const industry = this.querySelector('input[name="industry"]').value.trim();
-            const selectedService = this.querySelector('input[name="service"]:checked');
+            const selected = this.querySelector('input[name="service"]:checked');
 
             if (!name) { alert('Аты-жөніңізді енгізіңіз!'); return; }
             if (!industry) { alert('Салаңызды енгізіңіз!'); return; }
-            if (!selectedService) { alert('Қызмет түрін таңдаңыз!'); return; }
+            if (!selected) { alert('Қызмет түрін таңдаңыз!'); return; }
 
-            const service = selectedService.value;
-            const message =
+            const service = selected.value;
+            const msg =
                 `Сәлем, Бекзат!%0A%0A📌 Менің аты-жөнім: ${encodeURIComponent(name)}%0A📂 Салам: ${encodeURIComponent(industry)}%0A🛠 Таңдаған қызмет: ${encodeURIComponent(service)}%0A%0AЖоба бойынша кеңес алғым келеді.`;
             const phone = '77052973225';
-            window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+            window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
         });
 
         // =============================================
-        // 6. Барлық анимацияларды іске қосу (Intersection Observer)
+        // 6. Fade анимациялары (Intersection Observer)
         // =============================================
-        // Fade анимациялары
-        const fadeElements = document.querySelectorAll('.anim-fade-up, .anim-fade-left, .anim-fade-right');
-        const fadeObserver = new IntersectionObserver((entries) => {
+        const fadeEls = document.querySelectorAll('.fade-up, .fade-left, .fade-right, .fade-scale');
+
+        const obs = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('anim-visible');
+                    entry.target.classList.add('visible');
                 }
             });
-        }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
-        fadeElements.forEach(el => fadeObserver.observe(el));
+        }, {
+            threshold: 0.12,
+            rootMargin: '0px 0px -30px 0px'
+        });
 
-        // Slide-up анимациялары (тақырыпшалар)
-        const slideElements = document.querySelectorAll('.anim-slide-up');
-        const slideObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('anim-visible');
-                }
-            });
-        }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
-        slideElements.forEach(el => slideObserver.observe(el));
+        fadeEls.forEach(el => obs.observe(el));
 
-        // Қызметтерге арнайы 3D анимация
+        // Қызметтер үшін қосымша (servicePop анимациясы)
         const serviceItems = document.querySelectorAll('.service-item');
-        const serviceObserver = new IntersectionObserver((entries) => {
+        const serviceObs = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('anim-visible');
+                    entry.target.classList.add('visible');
                 }
             });
-        }, { threshold: 0.2 });
-        serviceItems.forEach(el => serviceObserver.observe(el));
+        }, { threshold: 0.15 });
+        serviceItems.forEach(el => serviceObs.observe(el));
     </script>
 
 </body>
