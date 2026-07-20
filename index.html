@@ -4,10 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Бекзат Шеметаев — Веб-разработчик & Дизайнер</title>
-
     <meta name="description" content="Бекзат Шеметаев — веб-разработчик және дизайнер." />
     <meta name="keywords" content="веб-разработчик, веб-дизайнер, UI/UX, портфолио, Астана" />
     <meta name="author" content="Бекзат Шеметаев" />
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
         /* ===== БАЗА ===== */
@@ -275,7 +277,7 @@
             border-radius: 2px;
         }
 
-        /* ===== HERO ===== */
+        /* ===== HERO (с шейдерным фоном) ===== */
         .hero-wrap {
             position: relative;
             width: 100%;
@@ -287,49 +289,15 @@
             justify-content: center;
             background: #0a1628;
         }
-        .rays-bg {
+        #shader-canvas {
             position: absolute;
-            inset: 0;
-            background-image:
-                repeating-linear-gradient(100deg,
-                    rgba(96, 165, 250, 0.10) 0%,
-                    rgba(96, 165, 250, 0.10) 6%,
-                    transparent 9%,
-                    transparent 11%,
-                    rgba(96, 165, 250, 0.10) 15%),
-                repeating-linear-gradient(100deg,
-                    #60a5fa 8%,
-                    #e879f9 14%,
-                    #60a5fa 20%,
-                    #5eead4 26%,
-                    #60a5fa 32%);
-            background-size: 400%, 300%;
-            background-position: 50% 50%, 50% 50%;
-            filter: blur(14px) opacity(0.45) saturate(180%);
-            mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 80%);
-            -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 80%);
-            animation: raysDrift 14s ease-in-out infinite alternate;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: 1;
+            opacity: 0.7;
         }
-        @keyframes raysDrift {
-            0% {
-                background-position: 0% 50%, 0% 50%;
-                transform: scale(1) rotate(0deg);
-            }
-            100% {
-                background-position: 100% 50%, 100% 50%;
-                transform: scale(1.05) rotate(2deg);
-            }
-        }
-        .rays-overlay {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse at 30% 40%, rgba(59, 130, 246, 0.08) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 60%, rgba(147, 197, 253, 0.05) 0%, transparent 50%);
-            z-index: 2;
-            pointer-events: none;
-        }
-
         .hero-content {
             position: relative;
             z-index: 3;
@@ -350,7 +318,6 @@
             background: rgba(59, 130, 246, 0.06);
             margin-bottom: 28px;
         }
-
         .hero-name {
             display: inline-flex;
             flex-wrap: nowrap;
@@ -383,7 +350,6 @@
             width: 0.25em;
             flex-shrink: 0;
         }
-
         .hero-content .subtitle {
             font-size: clamp(1.1rem, 2vw, 1.5rem);
             color: #b8d4f0;
@@ -581,58 +547,95 @@
             opacity: 1;
         }
 
-        /* ===== TESTIMONIALS ===== */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 28px;
+        /* ===== TESTIMONIALS (бесконечная прокрутка) ===== */
+        .testimonials-scroll-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            max-height: 740px;
+            overflow: hidden;
+            mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
         }
-        .testimonial-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(59, 130, 246, 0.10);
+        .testimonial-column {
+            flex: 0 0 300px;
+            max-width: 320px;
+            overflow: hidden;
             border-radius: 20px;
-            padding: 32px 28px;
-            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
-            backdrop-filter: blur(4px);
         }
-        .testimonial-card:hover {
+        .testimonial-column .scroll-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            animation: scrollUp var(--duration, 15s) linear infinite;
+        }
+        .testimonial-column .scroll-content .testimonial-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(59, 130, 246, 0.12);
+            border-radius: 20px;
+            padding: 24px 20px;
+            backdrop-filter: blur(4px);
+            transition: transform 0.3s, box-shadow 0.3s;
+            flex-shrink: 0;
+        }
+        .testimonial-column .scroll-content .testimonial-card:hover {
             transform: translateY(-4px);
             border-color: #3b82f6;
             box-shadow: 0 16px 40px -12px rgba(59, 130, 246, 0.15);
         }
-        .testimonial-card .stars {
+        .testimonial-column .scroll-content .testimonial-card .stars {
             color: #fbbf24;
             font-size: 1.1rem;
             letter-spacing: 2px;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
-        .testimonial-card .quote {
-            font-size: 1rem;
+        .testimonial-column .scroll-content .testimonial-card .quote {
+            font-size: 0.95rem;
             color: #d0e4f8;
-            line-height: 1.7;
-            margin-bottom: 18px;
+            line-height: 1.6;
+            margin-bottom: 14px;
             font-style: italic;
         }
-        .testimonial-card .author {
+        .testimonial-column .scroll-content .testimonial-card .author {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
         }
-        .testimonial-card .author img {
-            width: 52px;
-            height: 52px;
+        .testimonial-column .scroll-content .testimonial-card .author img {
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid rgba(59, 130, 246, 0.2);
         }
-        .testimonial-card .author .name {
+        .testimonial-column .scroll-content .testimonial-card .author .name {
             font-weight: 700;
             color: #ffffff;
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
-        .testimonial-card .author .role {
-            font-size: 0.85rem;
+        .testimonial-column .scroll-content .testimonial-card .author .role {
+            font-size: 0.8rem;
             color: #7aa9e0;
+        }
+
+        @keyframes scrollUp {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+
+        .testimonial-column:nth-child(1) .scroll-content {
+            --duration: 15s;
+        }
+        .testimonial-column:nth-child(2) .scroll-content {
+            --duration: 19s;
+        }
+        .testimonial-column:nth-child(3) .scroll-content {
+            --duration: 17s;
         }
 
         /* ===== PRICING ===== */
@@ -1010,8 +1013,30 @@
             .service-options {
                 grid-template-columns: 1fr 1fr;
             }
-            .testimonials-grid {
-                grid-template-columns: 1fr;
+            .testimonials-scroll-wrapper {
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+                max-height: none;
+                mask-image: none;
+                -webkit-mask-image: none;
+            }
+            .testimonial-column {
+                flex: 0 0 auto;
+                max-width: 100%;
+                width: 100%;
+                max-height: 300px;
+                mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
+                -webkit-mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
+            }
+            .testimonial-column .scroll-content {
+                animation-duration: calc(var(--duration) * 1.2);
+            }
+            .testimonial-column:nth-child(2) {
+                display: none;
+            }
+            .testimonial-column:nth-child(3) {
+                display: none;
             }
             .pricing-grid {
                 grid-template-columns: 1fr;
@@ -1044,6 +1069,18 @@
             .spotlight-nav.open .spotlight-glow,
             .spotlight-nav.open .spotlight-ambience {
                 display: none;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .testimonial-column:nth-child(3) {
+                display: none;
+            }
+            .testimonial-column {
+                flex: 0 0 45%;
+            }
+            .testimonials-scroll-wrapper {
+                gap: 20px;
             }
         }
 
@@ -1113,10 +1150,9 @@
         </div>
     </header>
 
-    <!-- ===== HERO ===== -->
+    <!-- ===== HERO (с шейдерным фоном) ===== -->
     <section class="hero-wrap" id="hero">
-        <div class="rays-bg"></div>
-        <div class="rays-overlay"></div>
+        <div id="shader-canvas"></div>
 
         <div class="hero-content">
             <div class="badge fade-up visible">Веб-разработчик &amp; Дизайнер</div>
@@ -1148,7 +1184,7 @@
         </div>
     </section>
 
-    <!-- ===== ЖОБАЛАР (5 жоба) ===== -->
+    <!-- ===== ЖОБАЛАР ===== -->
     <section id="projects">
         <div class="container">
             <div class="section-header">
@@ -1158,7 +1194,6 @@
             </div>
 
             <div class="projects-grid">
-                <!-- 1. DERO MEBEL -->
                 <div class="project-card fade-up delay-1">
                     <div class="project-number">01</div>
                     <h3>DERO MEBEL</h3>
@@ -1166,8 +1201,6 @@
                     <p class="project-desc">Премиум жиһаз бренді. Ыңғайлы каталог және төлем.</p>
                     <a href="https://dero-mebel-kz.vercel.app/" target="_blank" class="project-link">Сайтты көру →</a>
                 </div>
-
-                <!-- 2. Delicious -->
                 <div class="project-card fade-up delay-2">
                     <div class="project-number">02</div>
                     <h3>Delicious</h3>
@@ -1175,8 +1208,6 @@
                     <p class="project-desc">Мейрамхана визиткасы. Әдемі интерьер және мәзір.</p>
                     <a href="https://delicious-restaurnat.vercel.app/" target="_blank" class="project-link">Сайтты көру →</a>
                 </div>
-
-                <!-- 3. ADAL AVTO -->
                 <div class="project-card fade-up delay-3">
                     <div class="project-number">03</div>
                     <h3>ADAL AVTO</h3>
@@ -1184,8 +1215,6 @@
                     <p class="project-desc">Автосервис орталығы. Қызметтер, диагностика, жазылу.</p>
                     <a href="https://v0-auto-service-landing-page-three.vercel.app/" target="_blank" class="project-link">Сайтты көру →</a>
                 </div>
-
-                <!-- 4. SmileDent -->
                 <div class="project-card fade-up delay-4">
                     <div class="project-number">04</div>
                     <h3>SmileDent</h3>
@@ -1193,13 +1222,11 @@
                     <p class="project-desc">Стоматология клиникасы. Онлайн жазылу және білім.</p>
                     <a href="https://dental-clinic-shymkent.vercel.app/" target="_blank" class="project-link">Сайтты көру →</a>
                 </div>
-
-                <!-- 5. SkyElite (ЖАҢА) -->
                 <div class="project-card fade-up delay-5">
                     <div class="project-number">05</div>
                     <h3>SkyElite</h3>
                     <div class="project-category">Көп беттік сайт</div>
-                    <p class="project-desc">Жеке ұшақтар қызметінің премиум-сайты. Жайлылық, қауіпсіздік және сенімділік.</p>
+                    <p class="project-desc">Жеке ұшақтар қызметінің премиум-сайты.</p>
                     <a href="https://sky-elite-omega.vercel.app/" target="_blank" class="project-link">Сайтты көру →</a>
                 </div>
             </div>
@@ -1343,7 +1370,7 @@
         </div>
     </section>
 
-    <!-- ===== TESTIMONIALS ===== -->
+    <!-- ===== TESTIMONIALS (бесконечная прокрутка) ===== -->
     <section id="testimonials">
         <div class="container">
             <div class="section-header">
@@ -1352,42 +1379,8 @@
                 <p class="fade-up delay-2">Нақты жобалар мен тәжірибелер негізінде.</p>
             </div>
 
-            <div class="testimonials-grid">
-                <div class="testimonial-card fade-up delay-1">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote">"Бекзат біздің мейрамханаға толыққанды визиткалық сайт жасап берді. Дизайны өте әдемі, интерьер суреттері керемет көрінеді. Мәзірді онлайн көруге ыңғайлы, клиенттер риза. Тапсырыстар көбейді, бренд имиджіміз жақсарды."</p>
-                    <div class="author">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Айгүл Мұрат" />
-                        <div>
-                            <div class="name">Айгүл Мұрат</div>
-                            <div class="role">Delicious мейрамханасының менеджері</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card fade-up delay-2">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote">"Біздің автосервис үшін көп беттік сайт жасаттық. Клиенттер онлайн жазыла алады, қызметтерді көріп, бағалармен танысады. Диагностикаға жазылу жүйесі өте ыңғайлы. Бекзат барлық талаптарымызды ескеріп, уақытында жеткізді."</p>
-                    <div class="author">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ерлан Қайрат" />
-                        <div>
-                            <div class="name">Ерлан Қайрат</div>
-                            <div class="role">ADAL AVTO директоры</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card fade-up delay-3">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote">"Стоматология клиникамыз үшін курс платформасын жасаттық. Пациенттер онлайн жазылады, мамандармен танысады, білім беру контентін көре алады. Бекзат медицина саласының ерекшеліктерін терең түсініп, өте сапалы шешім ұсынды. Клиенттер ағымы екі есеге артты."</p>
-                    <div class="author">
-                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Динара Серік" />
-                        <div>
-                            <div class="name">Динара Серік</div>
-                            <div class="role">SmileDent бас дәрігері</div>
-                        </div>
-                    </div>
-                </div>
+            <div class="testimonials-scroll-wrapper" id="testimonialsWrapper">
+                <!-- Бағандар JavaScript арқылы толтырылады -->
             </div>
         </div>
     </section>
@@ -1411,7 +1404,6 @@
                         <p>Жобаның күрделілігіне байланысты. Қарапайым визиткалық сайт 3-5 жұмыс күнінде, интернет-магазин немесе көп беттік сайт 7-14 күнде дайын болады. Барлық кезеңдерді алдын ала келісіп, мерзімдерді нақты белгілейміз.</p>
                     </div>
                 </div>
-
                 <div class="faq-item fade-up delay-1">
                     <button class="faq-question" onclick="toggleFaq(this)">
                         <span>Техникалық қолдауға не кіреді?</span>
@@ -1421,7 +1413,6 @@
                         <p>Айлық техникалық қолдауға хостинг, домен аты, тәулік бойы қауіпсіздік мониторингі, тұрақты бағдарламалық жаңартулар, сайттың жұмысқа қабілеттілігін бақылау және кез келген сұрағыңызға жедел көмек кіреді.</p>
                     </div>
                 </div>
-
                 <div class="faq-item fade-up delay-2">
                     <button class="faq-question" onclick="toggleFaq(this)">
                         <span>Менің сайтым мобильді құрылғыларда дұрыс көріне ме?</span>
@@ -1431,7 +1422,6 @@
                         <p>Әрине! Барлық сайттарды адаптивті (responsive) дизайнмен жасаймын. Сайт телефон, планшет, ноутбук және компьютерде бірдей сапалы көрінеді. Бұл – заманауи веб-разработканың міндетті стандарты.</p>
                     </div>
                 </div>
-
                 <div class="faq-item fade-up delay-3">
                     <button class="faq-question" onclick="toggleFaq(this)">
                         <span>Өз доменімді пайдалана аламын ба?</span>
@@ -1441,7 +1431,6 @@
                         <p>Иә, өзіңіздің доменіңізді пайдалана аласыз немесе мен жаңа домен тіркеп, оны сіздің сайтыңызға байлап беремін. Доменді таңдауға және тіркеуге де көмектесемін.</p>
                     </div>
                 </div>
-
                 <div class="faq-item fade-up delay-4">
                     <button class="faq-question" onclick="toggleFaq(this)">
                         <span>Сайтты өзім басқара аламын ба?</span>
@@ -1451,7 +1440,6 @@
                         <p>Иә, барлық сайттарды қарапайым админ панельмен жабдықтаймын. Сізге арнайы бағдарламалық білім қажет емес – мәтіндерді, суреттерді, жаңалықтарды оңай өзгерте аласыз.</p>
                     </div>
                 </div>
-
                 <div class="faq-item fade-up delay-5">
                     <button class="faq-question" onclick="toggleFaq(this)">
                         <span>SEO (іздеу жүйелерінде көріну) қамтыла ма?</span>
@@ -1531,17 +1519,198 @@
 
     <!-- ===== JAVASCRIPT ===== -->
     <script>
-        // ===== 1. Hero – әріптерді ашу =====
-        document.addEventListener('DOMContentLoaded', function() {
-            const chars = document.querySelectorAll('#heroName .char');
-            chars.forEach((ch, i) => {
-                setTimeout(() => {
-                    ch.classList.add('revealed');
-                }, 120 + i * 45);
-            });
-        });
+        // ============================================================
+        // 1. Шейдерная анимация (Three.js)
+        // ============================================================
+        (function initShader() {
+            const container = document.getElementById('shader-canvas');
+            if (!container) return;
 
-        // ===== 2. Spotlight Navbar =====
+            const width = container.clientWidth || window.innerWidth;
+            const height = container.clientHeight || window.innerHeight;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.Camera();
+            camera.position.z = 1;
+
+            const renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+
+            const uniforms = {
+                time: { value: 1.0 },
+                resolution: { value: new THREE.Vector2(width, height) }
+            };
+
+            const vertexShader = `
+                void main() {
+                    gl_Position = vec4( position, 1.0 );
+                }
+            `;
+
+            const fragmentShader = `
+                #define TWO_PI 6.2831853072
+                #define PI 3.14159265359
+
+                precision highp float;
+                uniform vec2 resolution;
+                uniform float time;
+
+                void main(void) {
+                    vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
+                    float t = time * 0.05;
+                    float lineWidth = 0.002;
+
+                    vec3 color = vec3(0.0);
+                    for(int j = 0; j < 3; j++){
+                        for(int i=0; i < 5; i++){
+                            color[j] += lineWidth * float(i*i) / abs(fract(t - 0.01*float(j) + float(i)*0.01) * 5.0 - length(uv) + mod(uv.x + uv.y, 0.2));
+                        }
+                    }
+
+                    gl_FragColor = vec4(color[0], color[1], color[2], 1.0);
+                }
+            `;
+
+            const geometry = new THREE.PlaneGeometry(2, 2);
+            const material = new THREE.ShaderMaterial({
+                uniforms: uniforms,
+                vertexShader: vertexShader,
+                fragmentShader: fragmentShader,
+            });
+
+            const mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
+
+            function onResize() {
+                const w = container.clientWidth;
+                const h = container.clientHeight;
+                renderer.setSize(w, h);
+                uniforms.resolution.value.x = w;
+                uniforms.resolution.value.y = h;
+            }
+
+            window.addEventListener('resize', onResize);
+
+            function animate() {
+                requestAnimationFrame(animate);
+                uniforms.time.value += 0.05;
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            // Cleanup (опционально)
+            window.addEventListener('beforeunload', () => {
+                renderer.dispose();
+                geometry.dispose();
+                material.dispose();
+            });
+        })();
+
+        // ============================================================
+        // 2. Testimonials – бесконечная прокрутка (JS генерация)
+        // ============================================================
+        (function initTestimonials() {
+            const wrapper = document.getElementById('testimonialsWrapper');
+            if (!wrapper) return;
+
+            // Массив пікірлер (9 дана)
+            const testimonialsData = [{
+                text: "Бекзат біздің мейрамханаға толыққанды визиткалық сайт жасап берді. Дизайны өте әдемі, интерьер суреттері керемет көрінеді. Мәзірді онлайн көруге ыңғайлы, клиенттер риза.",
+                image: "https://randomuser.me/api/portraits/women/44.jpg",
+                name: "Айгүл Мұрат",
+                role: "Delicious менеджері"
+            }, {
+                text: "Біздің автосервис үшін көп беттік сайт жасаттық. Клиенттер онлайн жазыла алады, қызметтерді көріп, бағалармен танысады. Бекзат барлық талаптарымызды ескерді.",
+                image: "https://randomuser.me/api/portraits/men/32.jpg",
+                name: "Ерлан Қайрат",
+                role: "ADAL AVTO директоры"
+            }, {
+                text: "Стоматология клиникамыз үшін курс платформасын жасаттық. Пациенттер онлайн жазылады, мамандармен танысады. Бекзат медицина саласының ерекшеліктерін терең түсінді.",
+                image: "https://randomuser.me/api/portraits/women/68.jpg",
+                name: "Динара Серік",
+                role: "SmileDent бас дәрігері"
+            }, {
+                text: "Жобамыздың UI/UX дизайнын Бекзат жасады. Нәтижесінде конверсия 30%-ға өсті. Өте кәсіби маман.",
+                image: "https://randomuser.me/api/portraits/men/22.jpg",
+                name: "Аслан Төлеген",
+                role: "Startup негізін қалаушы"
+            }, {
+                text: "Интернет-магазиніміздің дизайнын жаңарттық. Клиенттер сатып алудан ләззат алады. Ұсынамын!",
+                image: "https://randomuser.me/api/portraits/women/33.jpg",
+                name: "Гүлжанат Әбіл",
+                role: "E-commerce менеджері"
+            }, {
+                text: "Бекзат бізге курстық платформа жасап берді. Оқыту үдерісі айтарлықтай жеңілдеді. Қолдау тобы да керемет.",
+                image: "https://randomuser.me/api/portraits/men/45.jpg",
+                name: "Нұрлан Сәбит",
+                role: "Білім беру директоры"
+            }, {
+                text: "Сайтымыздың жылдамдығы мен дизайны өте жақсарды. Бекзаттың шеберлігіне тәнті болдық.",
+                image: "https://randomuser.me/api/portraits/women/55.jpg",
+                name: "Жанна Қайратқызы",
+                role: "Маркетинг директоры"
+            }, {
+                text: "Біздің автосервис үшін жасаған сайт клиенттер ағынын екі есеге арттырды. Ұсынамын!",
+                image: "https://randomuser.me/api/portraits/men/62.jpg",
+                name: "Марат Жұмабек",
+                role: "Бизнес иесі"
+            }, {
+                text: "Медициналық портал жасату бойынша Бекзатпен жұмыс істедік. Пациенттерге ыңғайлы, дәрігерлерге қарапайым. Керемет!",
+                image: "https://randomuser.me/api/portraits/women/77.jpg",
+                name: "Меруерт Аманжол",
+                role: "Клиника басшысы"
+            }];
+
+            // Бөлу: 3 баған
+            const col1 = testimonialsData.slice(0, 3);
+            const col2 = testimonialsData.slice(3, 6);
+            const col3 = testimonialsData.slice(6, 9);
+
+            const durations = [15, 19, 17];
+
+            function buildColumn(items, duration) {
+                const column = document.createElement('div');
+                column.className = 'testimonial-column';
+                const scrollDiv = document.createElement('div');
+                scrollDiv.className = 'scroll-content';
+                scrollDiv.style.setProperty('--duration', duration + 's');
+
+                // Екі рет қайталау (бесконечность)
+                const doubled = [...items, ...items];
+                doubled.forEach((item, idx) => {
+                    const card = document.createElement('div');
+                    card.className = 'testimonial-card';
+                    card.innerHTML = `
+                        <div class="stars">★★★★★</div>
+                        <div class="quote">"${item.text}"</div>
+                        <div class="author">
+                            <img src="${item.image}" alt="${item.name}" />
+                            <div>
+                                <div class="name">${item.name}</div>
+                                <div class="role">${item.role}</div>
+                            </div>
+                        </div>
+                    `;
+                    scrollDiv.appendChild(card);
+                });
+
+                column.appendChild(scrollDiv);
+                return column;
+            }
+
+            wrapper.appendChild(buildColumn(col1, durations[0]));
+            wrapper.appendChild(buildColumn(col2, durations[1]));
+            wrapper.appendChild(buildColumn(col3, durations[2]));
+
+            // Мобильді бейімделу: 2-ші және 3-ші бағандарды жасыру CSS арқылы жасалды
+        })();
+
+        // ============================================================
+        // 3. Spotlight Navbar
+        // ============================================================
         (function spotlight() {
             const nav = document.getElementById('spotlightNav');
             if (!nav) return;
@@ -1596,16 +1765,18 @@
             });
         })();
 
-        // ===== 3. Мобильді мәзір =====
+        // ============================================================
+        // 4. Мобильді мәзір
+        // ============================================================
         const hamburger = document.getElementById('hamburger');
         const spotNav = document.getElementById('spotlightNav');
-
         hamburger?.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
             spotNav?.classList.toggle('open');
         });
 
-        // ===== 4. Сервис опциялары =====
+        // ============================================================
+        // 5. Сервис опциялары (выбор услуги)
+        // ============================================================
         const cards = document.querySelectorAll('.service-card');
         cards.forEach(card => {
             card.addEventListener('click', function() {
@@ -1616,7 +1787,9 @@
             });
         });
 
-        // ===== 5. Форма – WhatsApp =====
+        // ============================================================
+        // 6. Форма – WhatsApp
+        // ============================================================
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -1635,9 +1808,10 @@
             window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
         });
 
-        // ===== 6. Fade анимациялары =====
+        // ============================================================
+        // 7. Fade анимациялары (Intersection Observer)
+        // ============================================================
         const fadeEls = document.querySelectorAll('.fade-up, .fade-left, .fade-right, .fade-scale');
-
         const obs = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1648,7 +1822,6 @@
             threshold: 0.12,
             rootMargin: '0px 0px -30px 0px'
         });
-
         fadeEls.forEach(el => obs.observe(el));
 
         // Қызметтер үшін қосымша
@@ -1662,27 +1835,38 @@
         }, { threshold: 0.15 });
         serviceItems.forEach(el => serviceObs.observe(el));
 
-        // ===== 7. FAQ аккордеон =====
+        // ============================================================
+        // 8. Hero әріптерін ашу
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const chars = document.querySelectorAll('#heroName .char');
+            chars.forEach((ch, i) => {
+                setTimeout(() => {
+                    ch.classList.add('revealed');
+                }, 120 + i * 45);
+            });
+        });
+
+        // ============================================================
+        // 9. FAQ аккордеон
+        // ============================================================
         function toggleFaq(btn) {
             const item = btn.parentElement;
             const isOpen = item.classList.contains('open');
-
             document.querySelectorAll('.faq-item').forEach(el => {
                 el.classList.remove('open');
             });
-
             if (!isOpen) {
                 item.classList.add('open');
             }
         }
         window.toggleFaq = toggleFaq;
 
+        // Алғашқы FAQ ашу
         document.addEventListener('DOMContentLoaded', function() {
             const firstFaq = document.querySelector('.faq-item');
             if (firstFaq) {
-                setTimeout(() => {
-                    firstFaq.classList.add('open');
-                }, 500);
+                setTimeout(() => firstFaq.classList.add('open'), 500);
             }
         });
     </script>
