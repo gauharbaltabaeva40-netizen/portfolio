@@ -372,7 +372,7 @@
       font-size: 1.05rem;
     }
 
-    /* ===== ЖОБАЛАР ===== */
+    /* ===== ЖОБАЛАР (ноутбук + иконка) ===== */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -398,14 +398,17 @@
       position: relative;
       width: 100%;
       padding-top: 70%;
-      background: #111;
+      background: #0d1a2e;
       border-radius: 12px 12px 6px 6px;
       overflow: hidden;
-      border: 2px solid #333;
+      border: 2px solid #2a4a6a;
       box-shadow: 0 8px 24px rgba(0,0,0,0.5);
       margin-bottom: 14px;
       cursor: pointer;
       transition: transform 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .laptop-mockup:hover {
       transform: scale(1.02);
@@ -416,15 +419,38 @@
       left: 4%;
       width: 92%;
       height: 92%;
-      background: #000;
+      background: #0a1628;
       border-radius: 6px;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .laptop-mockup .screen img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+    /* Иконка ортасында */
+    .laptop-mockup .screen .project-icon {
+      font-size: 4rem;
+      color: #3b82f6;
+      opacity: 0.8;
+      text-shadow: 0 0 40px rgba(59, 130, 246, 0.2);
+      transition: transform 0.4s, opacity 0.4s;
+    }
+    .laptop-mockup:hover .screen .project-icon {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+    .laptop-mockup .screen .project-label {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.6rem;
+      color: #4a7ab0;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      background: rgba(0,0,0,0.5);
+      padding: 2px 12px;
+      border-radius: 12px;
     }
     .laptop-mockup .camera {
       position: absolute;
@@ -437,6 +463,7 @@
       border-radius: 50%;
       border: 1px solid #444;
       box-shadow: inset 0 0 4px #000;
+      z-index: 2;
     }
     .laptop-mockup .keyboard {
       position: absolute;
@@ -444,9 +471,9 @@
       left: 10%;
       width: 80%;
       height: 4%;
-      background: #222;
+      background: #1a2a3a;
       border-radius: 0 0 6px 6px;
-      border-top: 1px solid #444;
+      border-top: 1px solid #2a4a6a;
     }
     .project-card .project-number {
       font-size: 0.7rem;
@@ -495,7 +522,7 @@
       box-shadow: 0 8px 24px rgba(59, 130, 246, 0.35);
     }
 
-    /* ===== МОДАЛЬДЫ ТЕРЕЗЕ (iframe қосылды) ===== */
+    /* ===== МОДАЛЬДЫ ТЕРЕЗЕ (iframe) ===== */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -544,18 +571,18 @@
     .modal-content .laptop-mockup {
       padding-top: 55%;
       margin-bottom: 16px;
-      border-color: #555;
+      border-color: #3b6a9a;
     }
     .modal-content .laptop-mockup .screen {
       background: #000;
-    }
-    .modal-content .laptop-mockup .screen img {
-      object-fit: contain;
     }
     .modal-content .laptop-mockup .screen iframe {
       width: 100%;
       height: 100%;
       border: none;
+      display: block;
+    }
+    .modal-content .laptop-mockup .screen .project-icon {
       display: none;
     }
     .modal-content .modal-title {
@@ -601,36 +628,108 @@
     .modal-content .modal-actions .btn-secondary:hover {
       background: rgba(255,255,255,0.12);
     }
-    .modal-content .modal-view-toggle {
+
+    /* ===== PRICING (анимациялық) ===== */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
+    }
+    .pricing-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(59, 130, 246, 0.10);
+      border-radius: 20px;
+      padding: 30px 24px;
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+                  box-shadow 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+                  border-color 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      backdrop-filter: blur(4px);
+      text-align: center;
       display: flex;
-      gap: 8px;
-      margin-bottom: 12px;
+      flex-direction: column;
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+      transition: opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+                  transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+                  border-color 0.4s ease,
+                  box-shadow 0.4s ease;
     }
-    .modal-content .modal-view-toggle button {
-      padding: 6px 16px;
-      border-radius: 30px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(59, 130, 246, 0.15);
-      color: #93c5fd;
-      cursor: pointer;
-      font-family: inherit;
-      font-weight: 600;
-      font-size: 0.8rem;
-      transition: all 0.3s;
+    .pricing-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
-    .modal-content .modal-view-toggle button.active {
-      background: rgba(59, 130, 246, 0.2);
+    .pricing-card:hover {
+      transform: translateY(-8px) scale(1.02);
       border-color: #3b82f6;
-      color: #fff;
+      box-shadow: 0 24px 56px -12px rgba(59, 130, 246, 0.25);
     }
-    .modal-content .modal-view-toggle button:hover {
-      background: rgba(59, 130, 246, 0.1);
+    .pricing-card .pricing-icon {
+      font-size: 2.8rem;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .pricing-card h4 {
+      color: #fff;
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+    .pricing-card .pricing-price {
+      font-size: 2.2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #60a5fa, #93c5fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 6px 0;
+    }
+    .pricing-card .pricing-desc {
+      color: #b8d4f0;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      flex-grow: 1;
+      margin-bottom: 16px;
+    }
+    .pricing-card .pricing-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: #fff;
+      border: none;
+      border-radius: 40px;
+      padding: 12px 28px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: inherit;
+      box-shadow: 0 4px 16px rgba(59, 130, 246, 0.2);
+      align-self: center;
+    }
+    .pricing-card .pricing-btn:hover {
+      background: linear-gradient(135deg, #1d4ed8, #2563eb);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(59, 130, 246, 0.35);
+    }
+    .pricing-card .pricing-tag {
+      display: inline-block;
+      margin-bottom: 10px;
+      background: rgba(59, 130, 246, 0.12);
+      color: #93c5fd;
+      font-size: 0.7rem;
+      padding: 4px 14px;
+      border-radius: 40px;
+      border: 1px solid rgba(59, 130, 246, 0.1);
+      align-self: center;
+    }
+    .pricing-card.featured {
+      border-color: #3b82f6;
+      background: rgba(59, 130, 246, 0.06);
+      box-shadow: 0 0 40px rgba(59, 130, 246, 0.05);
     }
 
     /* ===== ҚЫЗМЕТТЕР ===== */
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 28px;
     }
     .service-card {
@@ -650,31 +749,20 @@
       box-shadow: 0 20px 48px -12px rgba(59, 130, 246, 0.2);
     }
     .service-card .service-icon {
-      font-size: 3rem;
+      font-size: 2.8rem;
       margin-bottom: 10px;
       display: block;
     }
     .service-card h4 {
       color: #fff;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       margin-bottom: 6px;
     }
     .service-card p {
       color: #b8d4f0;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       line-height: 1.6;
       flex-grow: 1;
-    }
-    .service-card .service-tag {
-      display: inline-block;
-      margin-top: 14px;
-      background: rgba(59, 130, 246, 0.12);
-      color: #93c5fd;
-      font-size: 0.75rem;
-      padding: 4px 16px;
-      border-radius: 40px;
-      border: 1px solid rgba(59, 130, 246, 0.1);
-      align-self: center;
     }
 
     /* ===== TESTIMONIALS ===== */
@@ -1082,6 +1170,9 @@
       .services-grid {
         grid-template-columns: 1fr 1fr;
       }
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
       .modal-content {
         padding: 16px;
         max-height: 95vh;
@@ -1123,11 +1214,6 @@
       .faq-answer {
         font-size: 0.9rem;
       }
-      .modal-content .modal-actions .btn-primary,
-      .modal-content .modal-actions .btn-secondary {
-        padding: 8px 16px;
-        font-size: 0.85rem;
-      }
     }
   </style>
 </head>
@@ -1153,11 +1239,10 @@
           <div class="spotlight-glow" id="spotlightGlow"></div>
           <div class="spotlight-ambience" id="spotlightAmbience"></div>
           <a href="#projects" class="nav-item active" data-index="0">Жобалар</a>
-          <a href="#process" class="nav-item" data-index="1">Процесс</a>
-          <a href="#services" class="nav-item" data-index="2">Қызметтер</a>
-          <a href="#testimonials" class="nav-item" data-index="3">Пікірлер</a>
-          <a href="#faq" class="nav-item" data-index="4">FAQ</a>
-          <a href="#contact" class="nav-item" data-index="5">Байланыс</a>
+          <a href="#pricing" class="nav-item" data-index="1">Бағалар</a>
+          <a href="#testimonials" class="nav-item" data-index="2">Пікірлер</a>
+          <a href="#faq" class="nav-item" data-index="3">FAQ</a>
+          <a href="#contact" class="nav-item" data-index="4">Байланыс</a>
         </div>
 
         <button class="hamburger" id="hamburger" aria-label="Мәзір">
@@ -1212,10 +1297,11 @@
 
       <div class="projects-grid" id="projectsGrid">
         <!-- 1. OLKEY MEBEL -->
-        <div class="project-card fade-up delay-1" data-project='{"title":"OLKEY MEBEL","category":"Интернет-магазин","desc":"Премиум жиһаз бренді. Ыңғайлы каталог және төлем.","link":"https://olkey.vercel.app/","screenshot":"screenshots/olkey.jpg"}'>
+        <div class="project-card fade-up delay-1" data-project='{"title":"OLKEY MEBEL","category":"Интернет-магазин","desc":"Премиум жиһаз бренді. Ыңғайлы каталог және төлем.","link":"https://olkey.vercel.app/","icon":"🪑"}'>
           <div class="laptop-mockup">
             <div class="screen">
-              <img src="screenshots/olkey.jpg" alt="OLKEY MEBEL" onerror="this.src='https://via.placeholder.com/400x200/0a1628/3b82f6?text=OLKEY+MEBEL'">
+              <span class="project-icon">🪑</span>
+              <span class="project-label">OLKEY MEBEL</span>
             </div>
             <div class="camera"></div>
             <div class="keyboard"></div>
@@ -1224,14 +1310,15 @@
           <h3>OLKEY MEBEL</h3>
           <div class="project-category">Интернет-магазин</div>
           <p class="project-desc">Премиум жиһаз бренді. Ыңғайлы каталог және төлем.</p>
-          <button class="project-link-btn" onclick="openModal(this)">Толығырақ</button>
+          <button class="project-link-btn" onclick="openModal(this)">Сайтты көру</button>
         </div>
 
         <!-- 2. Delicious -->
-        <div class="project-card fade-up delay-2" data-project='{"title":"Delicious","category":"Бір беттік сайт","desc":"Мейрамхана визиткасы. Әдемі интерьер және мәзір.","link":"https://delicious-restaurnat.vercel.app/","screenshot":"screenshots/delicious.jpg"}'>
+        <div class="project-card fade-up delay-2" data-project='{"title":"Delicious","category":"Бір беттік сайт","desc":"Мейрамхана визиткасы. Әдемі интерьер және мәзір.","link":"https://delicious-restaurnat.vercel.app/","icon":"🍽️"}'>
           <div class="laptop-mockup">
             <div class="screen">
-              <img src="screenshots/delicious.jpg" alt="Delicious" onerror="this.src='https://via.placeholder.com/400x200/0a1628/3b82f6?text=Delicious'">
+              <span class="project-icon">🍽️</span>
+              <span class="project-label">Delicious</span>
             </div>
             <div class="camera"></div>
             <div class="keyboard"></div>
@@ -1240,14 +1327,15 @@
           <h3>Delicious</h3>
           <div class="project-category">Бір беттік сайт</div>
           <p class="project-desc">Мейрамхана визиткасы. Әдемі интерьер және мәзір.</p>
-          <button class="project-link-btn" onclick="openModal(this)">Толығырақ</button>
+          <button class="project-link-btn" onclick="openModal(this)">Сайтты көру</button>
         </div>
 
         <!-- 3. ADAL AVTO -->
-        <div class="project-card fade-up delay-3" data-project='{"title":"ADAL AVTO","category":"Көп беттік сайт","desc":"Автосервис орталығы. Қызметтер, диагностика, жазылу.","link":"https://v0-auto-service-landing-page-three.vercel.app/","screenshot":"screenshots/adalavto.jpg"}'>
+        <div class="project-card fade-up delay-3" data-project='{"title":"ADAL AVTO","category":"Көп беттік сайт","desc":"Автосервис орталығы. Қызметтер, диагностика, жазылу.","link":"https://v0-auto-service-landing-page-three.vercel.app/","icon":"🚗"}'>
           <div class="laptop-mockup">
             <div class="screen">
-              <img src="screenshots/adalavto.jpg" alt="ADAL AVTO" onerror="this.src='https://via.placeholder.com/400x200/0a1628/3b82f6?text=ADAL+AVTO'">
+              <span class="project-icon">🚗</span>
+              <span class="project-label">ADAL AVTO</span>
             </div>
             <div class="camera"></div>
             <div class="keyboard"></div>
@@ -1256,14 +1344,15 @@
           <h3>ADAL AVTO</h3>
           <div class="project-category">Көп беттік сайт</div>
           <p class="project-desc">Автосервис орталығы. Қызметтер, диагностика, жазылу.</p>
-          <button class="project-link-btn" onclick="openModal(this)">Толығырақ</button>
+          <button class="project-link-btn" onclick="openModal(this)">Сайтты көру</button>
         </div>
 
         <!-- 4. SmileDent -->
-        <div class="project-card fade-up delay-4" data-project='{"title":"SmileDent","category":"Курс платформасы","desc":"Стоматология клиникасы. Онлайн жазылу және білім.","link":"https://dental-clinic-shymkent.vercel.app/","screenshot":"screenshots/smiledent.jpg"}'>
+        <div class="project-card fade-up delay-4" data-project='{"title":"SmileDent","category":"Курс платформасы","desc":"Стоматология клиникасы. Онлайн жазылу және білім.","link":"https://dental-clinic-shymkent.vercel.app/","icon":"🦷"}'>
           <div class="laptop-mockup">
             <div class="screen">
-              <img src="screenshots/smiledent.jpg" alt="SmileDent" onerror="this.src='https://via.placeholder.com/400x200/0a1628/3b82f6?text=SmileDent'">
+              <span class="project-icon">🦷</span>
+              <span class="project-label">SmileDent</span>
             </div>
             <div class="camera"></div>
             <div class="keyboard"></div>
@@ -1272,14 +1361,15 @@
           <h3>SmileDent</h3>
           <div class="project-category">Курс платформасы</div>
           <p class="project-desc">Стоматология клиникасы. Онлайн жазылу және білім.</p>
-          <button class="project-link-btn" onclick="openModal(this)">Толығырақ</button>
+          <button class="project-link-btn" onclick="openModal(this)">Сайтты көру</button>
         </div>
 
         <!-- 5. SkyElite -->
-        <div class="project-card fade-up delay-5" data-project='{"title":"SkyElite","category":"Көп беттік сайт","desc":"Жеке ұшақтар қызметінің премиум-сайты.","link":"https://sky-elite-omega.vercel.app/","screenshot":"screenshots/skyelite.jpg"}'>
+        <div class="project-card fade-up delay-5" data-project='{"title":"SkyElite","category":"Көп беттік сайт","desc":"Жеке ұшақтар қызметінің премиум-сайты.","link":"https://sky-elite-omega.vercel.app/","icon":"✈️"}'>
           <div class="laptop-mockup">
             <div class="screen">
-              <img src="screenshots/skyelite.jpg" alt="SkyElite" onerror="this.src='https://via.placeholder.com/400x200/0a1628/3b82f6?text=SkyElite'">
+              <span class="project-icon">✈️</span>
+              <span class="project-label">SkyElite</span>
             </div>
             <div class="camera"></div>
             <div class="keyboard"></div>
@@ -1288,85 +1378,73 @@
           <h3>SkyElite</h3>
           <div class="project-category">Көп беттік сайт</div>
           <p class="project-desc">Жеке ұшақтар қызметінің премиум-сайты.</p>
-          <button class="project-link-btn" onclick="openModal(this)">Толығырақ</button>
+          <button class="project-link-btn" onclick="openModal(this)">Сайтты көру</button>
+        </div>
+
+        <!-- 6. SAPAR-SUPERMARKET (ЖАҢА) -->
+        <div class="project-card fade-up delay-6" data-project='{"title":"SAPAR SUPERMARKET","category":"Интернет-магазин","desc":"Супермаркет желісі. Ыңғайлы сатып алу және жеткізу.","link":"https://camera-chunk-44155885.figma.site/#%D0%B1%D1%96%D0%B7-%D1%82%D1%83%D1%80%D0%B0%D0%BB%D1%8B","icon":"🛒"}'>
+          <div class="laptop-mockup">
+            <div class="screen">
+              <span class="project-icon">🛒</span>
+              <span class="project-label">SAPAR</span>
+            </div>
+            <div class="camera"></div>
+            <div class="keyboard"></div>
+          </div>
+          <div class="project-number">06</div>
+          <h3>SAPAR SUPERMARKET</h3>
+          <div class="project-category">Интернет-магазин</div>
+          <p class="project-desc">Супермаркет желісі. Ыңғайлы сатып алу және жеткізу.</p>
+          <button class="project-link-btn" onclick="openModal(this)">Сайтты көру</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== ПРОЦЕСС ===== -->
-  <section id="process">
+  <!-- ===== PRICING (Бағалар) ===== -->
+  <section id="pricing">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag fade-up">Жұмыс процесі</div>
-        <h2 class="fade-up delay-1">Қалай жұмыс істеймін</h2>
-        <p class="fade-up delay-2">Әр жобаны сапалы жеткізу үшін кезеңдер.</p>
+        <div class="section-tag fade-up">Бағалар</div>
+        <h2 class="fade-up delay-1">Қызметтерімнің құны</h2>
+        <p class="fade-up delay-2">Сіздің бизнесіңізге сай шешімді таңдаңыз.</p>
       </div>
 
-      <div class="process-grid">
-        <div class="process-step fade-up delay-1">
-          <div class="step-number">01</div>
-          <h4>Зерттеу</h4>
-          <p>Мақсат, аудитория және талаптарды талдау.</p>
-        </div>
-        <div class="process-step fade-up delay-2">
-          <div class="step-number">02</div>
-          <h4>Дизайн</h4>
-          <p>Прототиптер, макеттер және визуалдар.</p>
-        </div>
-        <div class="process-step fade-up delay-3">
-          <div class="step-number">03</div>
-          <h4>Тестілеу</h4>
-          <p>Функционалдық, юзабилити және браузерлер.</p>
-        </div>
-        <div class="process-step fade-up delay-4">
-          <div class="step-number">04</div>
-          <h4>Жеткізу</h4>
-          <p>Хостингке орналастыру және қолдау.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== ҚЫЗМЕТТЕР ===== -->
-  <section id="services">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag fade-up">Қызметтер</div>
-        <h2 class="fade-up delay-1">Не ұсынамын</h2>
-        <p class="fade-up delay-2">Бизнесіңізге арналған веб-шешімдер.</p>
-      </div>
-
-      <div class="services-grid">
-        <div class="service-card fade-up delay-1">
-          <span class="service-icon">📄</span>
+      <div class="pricing-grid" id="pricingGrid">
+        <div class="pricing-card delay-1" data-delay="0">
+          <span class="pricing-icon">📄</span>
           <h4>Лендинг сайт</h4>
-          <p>Бір немесе бірнеше тауар мен қызмет түрін және іс-шараны таныстыруға арналған визиткалық сайт.</p>
-          <span class="service-tag">2–3 күн</span>
+          <div class="pricing-price">$50</div>
+          <div class="pricing-tag">бастап</div>
+          <p class="pricing-desc">Бір немесе бірнеше тауар мен қызмет түрін таныстыруға арналған визиткалық сайт.</p>
+          <button class="pricing-btn" onclick="scrollToContact()">Тапсырыс беру</button>
         </div>
-        <div class="service-card fade-up delay-2">
-          <span class="service-icon">🏢</span>
+
+        <div class="pricing-card delay-2" data-delay="1">
+          <span class="pricing-icon">🏢</span>
           <h4>Көп беттік сайт</h4>
-          <p>Компанияңыздың қызметі мен өнімдерін толық таныстыратын көпбеттік сайт.</p>
-          <span class="service-tag">10–20 күн</span>
+          <div class="pricing-price">$400</div>
+          <div class="pricing-tag">бастап</div>
+          <p class="pricing-desc">Компанияңыздың қызметі мен өнімдерін толық таныстыратын көпбеттік сайт.</p>
+          <button class="pricing-btn" onclick="scrollToContact()">Тапсырыс беру</button>
         </div>
-        <div class="service-card fade-up delay-3">
-          <span class="service-icon">🛒</span>
+
+        <div class="pricing-card featured delay-3" data-delay="2">
+          <span class="pricing-icon">🛒</span>
           <h4>Интернет-дүкен</h4>
-          <p>Тауарларыңызды интернет арқылы сатуға және тапсырыс алуға арналған сайт.</p>
-          <span class="service-tag">7–14 күн</span>
+          <div class="pricing-price">$300</div>
+          <div class="pricing-tag">бастап</div>
+          <p class="pricing-desc">Тауарларыңызды интернет арқылы сатуға және тапсырыс алуға арналған сайт.</p>
+          <button class="pricing-btn" onclick="scrollToContact()">Тапсырыс беру</button>
         </div>
-        <div class="service-card fade-up delay-4">
-          <span class="service-icon">🖼️</span>
-          <h4>Портфолио сайт</h4>
-          <p>Жұмыстарыңызды көркем түрде көрсетіп, тұтынушыларды тартатын портфолио.</p>
-          <span class="service-tag">5–10 күн</span>
-        </div>
-        <div class="service-card fade-up delay-5">
-          <span class="service-icon">🎓</span>
-          <h4>Онлайн-курс</h4>
-          <p>Өнімнің тұралы түсірілген сабақтарды жинақтап, оқушыларға ұсынатын платформа.</p>
-          <span class="service-tag">2–5 күн</span>
+
+        <div class="pricing-card delay-4" data-delay="3">
+          <span class="pricing-icon">🎓</span>
+          <h4>Курс платформасы</h4>
+          <div class="pricing-price">$250</div>
+          <div class="pricing-tag">бастап</div>
+          <p class="pricing-desc">Сабақтарды жинақтап, оқушыларға ұсынатын платформалық сайт.</p>
+          <button class="pricing-btn" onclick="scrollToContact()">Тапсырыс беру</button>
         </div>
       </div>
     </div>
@@ -1403,16 +1481,16 @@
             <span class="icon">▼</span>
           </button>
           <div class="faq-answer">
-            <p>Жобаның күрделілігіне байланысты. Қарапайым визиткалық сайт 3-5 жұмыс күнінде, интернет-магазин немесе көп беттік сайт 7-14 күнде дайын болады. Барлық кезеңдерді алдын ала келісіп, мерзімдерді нақты белгілейміз.</p>
+            <p>Жобаның күрделілігіне байланысты. Лендинг 2-5 күнде, көп беттік сайт 7-14 күнде дайын болады.</p>
           </div>
         </div>
         <div class="faq-item fade-up delay-1">
           <button class="faq-question" onclick="toggleFaq(this)">
-            <span>Техникалық қолдауға не кіреді?</span>
+            <span>Техникалық қолдау бар ма?</span>
             <span class="icon">▼</span>
           </button>
           <div class="faq-answer">
-            <p>Айлық техникалық қолдауға хостинг, домен аты, тәулік бойы қауіпсіздік мониторингі, тұрақты бағдарламалық жаңартулар, сайттың жұмысқа қабілеттілігін бақылау және кез келген сұрағыңызға жедел көмек кіреді.</p>
+            <p>Иә, әр жобадан кейін 1 ай тегін техникалық қолдау көрсетемін. Кез келген мәселе бойынша хабарлассаңыз болды.</p>
           </div>
         </div>
         <div class="faq-item fade-up delay-2">
@@ -1421,7 +1499,7 @@
             <span class="icon">▼</span>
           </button>
           <div class="faq-answer">
-            <p>Әрине! Барлық сайттарды адаптивті (responsive) дизайнмен жасаймын. Сайт телефон, планшет, ноутбук және компьютерде бірдей сапалы көрінеді. Бұл – заманауи веб-разработканың міндетті стандарты.</p>
+            <p>Әрине! Барлық сайттар адаптивті (responsive) дизайнмен жасалады. Телефон, планшет және компьютерде бірдей сапалы көрінеді.</p>
           </div>
         </div>
         <div class="faq-item fade-up delay-3">
@@ -1430,7 +1508,7 @@
             <span class="icon">▼</span>
           </button>
           <div class="faq-answer">
-            <p>Иә, өзіңіздің доменіңізді пайдалана аласыз немесе мен жаңа домен тіркеп, оны сіздің сайтыңызға байлап беремін. Доменді таңдауға және тіркеуге де көмектесемін.</p>
+            <p>Иә, өзіңіздің доменіңізді пайдалана аласыз. Қаласаңыз, мен жаңа домен тіркеп беруге де көмектесемін.</p>
           </div>
         </div>
         <div class="faq-item fade-up delay-4">
@@ -1439,16 +1517,7 @@
             <span class="icon">▼</span>
           </button>
           <div class="faq-answer">
-            <p>Иә, барлық сайттарды қарапайым админ панельмен жабдықтаймын. Сізге арнайы бағдарламалық білім қажет емес – мәтіндерді, суреттерді, жаңалықтарды оңай өзгерте аласыз.</p>
-          </div>
-        </div>
-        <div class="faq-item fade-up delay-5">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            <span>SEO (іздеу жүйелерінде көріну) қамтыла ма?</span>
-            <span class="icon">▼</span>
-          </button>
-          <div class="faq-answer">
-            <p>Барлық сайттарды іздеу жүйелеріне (Google, Yandex) оңтайландырып жасаймын. Дұрыс мета-тегтер, жылдам жүктелу, мобильді бейімделу және басқа да SEO факторлары ескеріледі.</p>
+            <p>Иә, барлық сайттарды қарапайым админ панельмен жабдықтаймын. Арнайы білім қажет емес – мәтіндер мен суреттерді оңай өзгерте аласыз.</p>
           </div>
         </div>
       </div>
@@ -1524,17 +1593,12 @@
     </div>
   </div>
 
-  <!-- ===== МОДАЛЬДЫ ТЕРЕЗЕ (iframe + скриншот) ===== -->
+  <!-- ===== МОДАЛЬДЫ ТЕРЕЗЕ (iframe) ===== -->
   <div class="modal-overlay" id="projectModal">
     <div class="modal-content">
       <button class="modal-close" onclick="closeModal()">&times;</button>
-      <div class="modal-view-toggle">
-        <button id="viewScreenshotBtn" class="active" onclick="switchModalView('screenshot')">Скриншот</button>
-        <button id="viewSiteBtn" onclick="switchModalView('site')">Сайтты көру</button>
-      </div>
       <div class="laptop-mockup">
-        <div class="screen" id="modalScreen">
-          <img id="modalScreenshot" src="" alt="Скриншот" />
+        <div class="screen">
           <iframe id="modalIframe" src="" allowfullscreen></iframe>
         </div>
         <div class="camera"></div>
@@ -1543,7 +1607,6 @@
       <h3 class="modal-title" id="modalTitle"></h3>
       <div class="modal-desc" id="modalDesc"></div>
       <div class="modal-actions">
-        <a id="modalLink" href="#" target="_blank" class="btn-primary" style="display:none;">Сайтқа өту (жаңа бет)</a>
         <button class="btn-secondary" onclick="closeModal()">Жабу</button>
       </div>
     </div>
@@ -1701,7 +1764,7 @@
     })();
 
     // ============================================================
-    // 3. Модальды терезе (скриншот / iframe)
+    // 3. Модальды терезе (iframe арқылы сайтты көрсету)
     // ============================================================
     let currentProjectData = null;
 
@@ -1713,15 +1776,7 @@
 
       document.getElementById('modalTitle').textContent = data.title;
       document.getElementById('modalDesc').textContent = data.desc;
-      document.getElementById('modalScreenshot').src = data.screenshot || 'https://via.placeholder.com/600x350/0a1628/3b82f6?text=' + encodeURIComponent(data.title);
       document.getElementById('modalIframe').src = data.link;
-      document.getElementById('modalLink').href = data.link;
-
-      // Скриншот көрсету, iframe жасыру
-      document.getElementById('modalScreenshot').style.display = 'block';
-      document.getElementById('modalIframe').style.display = 'none';
-      document.getElementById('viewScreenshotBtn').classList.add('active');
-      document.getElementById('viewSiteBtn').classList.remove('active');
 
       document.getElementById('projectModal').classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -1735,34 +1790,6 @@
       iframe.src = 'about:blank';
     }
 
-    function switchModalView(view) {
-      const img = document.getElementById('modalScreenshot');
-      const iframe = document.getElementById('modalIframe');
-      const btnScreenshot = document.getElementById('viewScreenshotBtn');
-      const btnSite = document.getElementById('viewSiteBtn');
-
-      if (view === 'screenshot') {
-        img.style.display = 'block';
-        iframe.style.display = 'none';
-        btnScreenshot.classList.add('active');
-        btnSite.classList.remove('active');
-        // iframe тоқтату
-        iframe.src = 'about:blank';
-        if (currentProjectData) {
-          iframe.src = currentProjectData.link;
-        }
-      } else {
-        img.style.display = 'none';
-        iframe.style.display = 'block';
-        btnSite.classList.add('active');
-        btnScreenshot.classList.remove('active');
-        // iframe жүктеу
-        if (currentProjectData) {
-          iframe.src = currentProjectData.link;
-        }
-      }
-    }
-
     // Закрытие по клику на оверлей
     document.getElementById('projectModal').addEventListener('click', function(e) {
       if (e.target === this) closeModal();
@@ -1774,7 +1801,39 @@
     });
 
     // ============================================================
-    // 4. Spotlight Navbar
+    // 4. Pricing анимациясы (карточкалар бір-бірлеп пайда болады)
+    // ============================================================
+    (function initPricingAnimation() {
+      const cards = document.querySelectorAll('.pricing-card');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Әр карточканы кідіріспен көрсету
+            const allCards = document.querySelectorAll('.pricing-card');
+            allCards.forEach((card, index) => {
+              setTimeout(() => {
+                card.classList.add('visible');
+              }, index * 150);
+            });
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.15 });
+
+      if (cards.length > 0) {
+        observer.observe(cards[0]);
+      }
+    })();
+
+    // ============================================================
+    // 5. "Тапсырыс беру" батырмасы - формаға апару
+    // ============================================================
+    function scrollToContact() {
+      document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // ============================================================
+    // 6. Spotlight Navbar
     // ============================================================
     (function spotlight() {
       const nav = document.getElementById('spotlightNav');
@@ -1831,7 +1890,7 @@
     })();
 
     // ============================================================
-    // 5. Мобильді мәзір
+    // 7. Мобильді мәзір
     // ============================================================
     const hamburger = document.getElementById('hamburger');
     const spotNav = document.getElementById('spotlightNav');
@@ -1840,7 +1899,7 @@
     });
 
     // ============================================================
-    // 6. Сервис опциялары (форма)
+    // 8. Сервис опциялары (форма)
     // ============================================================
     const serviceCards = document.querySelectorAll('.service-card-opt');
     serviceCards.forEach(card => {
@@ -1853,7 +1912,7 @@
     });
 
     // ============================================================
-    // 7. Форма – WhatsApp
+    // 9. Форма – WhatsApp
     // ============================================================
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -1874,7 +1933,7 @@
     });
 
     // ============================================================
-    // 8. Fade анимациялары
+    // 10. Fade анимациялары
     // ============================================================
     const fadeEls = document.querySelectorAll('.fade-up, .fade-left, .fade-right, .fade-scale');
     const obs = new IntersectionObserver((entries) => {
@@ -1890,7 +1949,7 @@
     fadeEls.forEach(el => obs.observe(el));
 
     // ============================================================
-    // 9. Hero әріптерін ашу
+    // 11. Hero әріптерін ашу
     // ============================================================
     document.addEventListener('DOMContentLoaded', function() {
       const chars = document.querySelectorAll('#heroName .char');
@@ -1902,7 +1961,7 @@
     });
 
     // ============================================================
-    // 10. FAQ аккордеон
+    // 12. FAQ аккордеон
     // ============================================================
     function toggleFaq(btn) {
       const item = btn.parentElement;
